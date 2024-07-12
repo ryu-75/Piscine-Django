@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Progress bar</title>
+        <link rel="stylesheet" href="./style.css" /> 
+    </head>
+    <body>
+        <div style="display: flex; flex-direction: row; justify-content: center; gap: 3rem;">
+            <div style="width: 50%;">
+                <h2>Frontend</h2>
+                <ul>
+                    <li>HTML5</li>
+                    <div>
+                        <p data-value="80"></p>
+                        <progress class="html5" class="progress-bar" value="80" max="100"></progress>
+                    </div>
+                    <li>CSS3</li>
+                    <div>
+                        <p data-value="60"></p>
+                        <progress class="css3" value="60" max="100"></progress>
+                    </div>
+                    <li>jQuery</li>
+                    <div>
+                        <p data-value="50"></p>
+                        <progress class="jquery" value="50" max="100"></progress>
+                    </div>
+                </ul>
+            </div>
+            <div style="width: 50%;">
+                <h2>Backend</h2>
+                <ul>
+                    <li>Python</li>
+                    <div>
+                        <p id="progress-percent" data-value="75"></p>
+                        <progress class="python" value="75" max="100"></progress>
+                    </div>
+                    <li>PHP</li>
+                    <div>
+                        <p id="progress-percent" data-value="65" style="left: 0;"></p>
+                        <progress class="php" value="65" max="100"></progress>
+                    </div>
+                    <li>Node.Js</li>
+                    <div>
+                        <p id="progress-percent" data-value="35"></p>
+                        <progress class="node-js" value="35" max="100"></progress>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <script>
+            const   progress_percent = document.querySelectorAll("p[data-value]");
+
+            function reach_percent(newValue) {
+                progress_percent.forEach(function(percent) {
+                    let dataValue = parseInt(percent.getAttribute("data-value"));
+                    if (dataValue <= newValue) {
+                        percent.style.width = dataValue + "%";
+                    }
+                })
+            }
+            progress_percent.forEach(function(percent) {
+                let dataValue = parseInt(percent.getAttribute("data-value"));
+                reach_percent(dataValue);
+            })
+        </script>
+    </body>
+</html>

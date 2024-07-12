@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curriculum Vitae</title>
+    <style>
+        body {
+            background-color: lightcyan;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        tr {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: auto;
+        }
+
+        th {
+            top: 10px;
+            padding-bottom: 10px;
+            margin-left: 15px;
+            text-align: left;
+        }
+        
+        .subtitle {
+            margin-left: 15px;
+        }
+
+        td, li {
+            padding: 0.2rem;
+        }
+
+        td {
+            margin-left: 1rem;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        aside {
+            background-color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        .technologie {
+            list-style-position: outside;
+            padding-left: 0px;
+            border: 2px solid;
+        }
+        .sections {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        section {
+            background-color: white; 
+            margin: 5px;
+            width: 100%;
+        }
+        .section-container {
+            border-left: 2px solid; 
+            border-right: 2px solid; 
+            border-top: 2px solid;
+        }
+        .section-header {
+            display: flex; 
+            justify-content: space-between; 
+            margin: 1rem;
+        }
+        .section-container-content {
+            display: flex; 
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <header style="text-align: center;">
+        <h1 style="text-align: center;">Curriculum vitae</h1>
+    </header>
+    <div style="display: flex; justify-content: space-around;">
+        <aside class="container">
+            <table style="border: 2px solid">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: left;">
+                            <b>Personal information</b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="border: 2px solid;">
+                        <td style="padding: 0.5rem;">Sasha</td>
+                        <td style="padding: 0.5rem;">LORION</td>
+                        <td style="padding: 0.5rem;">06.87.00.00.00</td>
+                        <td style="padding: 0.5rem;">example@example.fr</td>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: left;">
+                            <b>Language</b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="padding: 0.5rem;">French</td>
+                    <td style="padding: 0.5rem;">English</td>
+                    <td style="padding: 0.5rem;">Japanese</td>
+                </tr>
+            </table>
+                <th><b>Technologie</b></th>
+                <tr>
+                    <td>C</td>
+                    <td>C++</td>
+                    <td>Typescript</td>
+                    <td>Python</td>
+                    <td>Javascript</td>
+                </tr>
+            </table>
+            <div style="border: 0.5px solid; width: auto;"></div>
+            <table>
+                <th><b>Hobbies</b></th>
+                <tr>
+                    <td>Draw</td>
+                    <td>Music</td>
+                    <td>Travel</td>
+                </tr>
+            </table>
+        </aside>
+        <section>
+            <div class="section-container">
+                <h2 style="border-bottom: 2px solid; margin-top: 0px; padding: 1rem;">Education</h2>
+                <div class="section-container-content">
+                    <div class="section-header">
+                        <h4>42 School</h4>
+                        <h4>2022 - 2024</h4> 
+                    </div>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Quisque suscipit semper varius.</li>
+                        <li>Suspendisse porta</li>
+                        <li>Proin elit ligula</li>
+                        <li>Curabitur vel lobortis</li>
+                        <li>Phasellus condimentum</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-container">
+                <div class="section-container-content" style="border-bottom: 2px solid;">
+                    <div class="section-header">
+                        <h4 >Migical School Academy</h4>
+                        <h4 >2020 - 2022</h4> 
+                    </div>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Quisque suscipit semper varius.</li>
+                        <li>Suspendisse porta</li>
+                        <li>Proin elit ligula</li>
+                        <li>Curabitur vel lobortis</li>
+                        <li>Phasellus condimentum</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="section-container">
+                <h2 style="border-bottom: 2px solid; margin-top: 0px; padding: 1rem;">Professional</h2>
+                <div class="section-container-content" style="border-top: 2px">
+                    <div class="section-header">
+                        <h4>Worked somewhere</h4>
+                        <h4>2019 - 2020</h4> 
+                    </div>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Quisque suscipit semper varius.</li>
+                        <li>Suspendisse porta</li>
+                        <li>Proin elit ligula</li>
+                        <li>Curabitur vel lobortis</li>
+                        <li>Phasellus condimentum</li>
+                    </ul>
+                </div>
+            </div>
+            <div 
+                style="border-left: 2px solid #424242; 
+                    border-right: 2px solid #424242; 
+                    border-top: 2px solid #424242;
+                    ">
+                <div class="section-container-content" style="border-bottom: 2px solid #424242">
+                    <div class="section-header">
+                        <h4 >Worked somewhere again</h4>
+                        <h4 >2018 - 2019</h4> 
+                    </div>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Quisque suscipit semper varius.</li>
+                        <li>Suspendisse porta</li>
+                        <li>Proin elit ligula</li>
+                        <li>Curabitur vel lobortis</li>
+                        <li>Phasellus condimentum</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>

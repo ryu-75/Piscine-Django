@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 30%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 1rem;
+        }
+        input, select {
+            margin: 10px 0;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 1rem);
+        }
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            gap: 1rem;
+        }
+        .checkbox-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-group input {
+            margin-left: 0.5rem;
+        }
+
+        .checkbox-group > .sub-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="firstname">Firstname:</label>
+        <input type="text" id="firstname" name="firstname" autocomplete="given-name">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" autocomplete="family-name">
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" autocomplete="off">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel">
+
+        <h4 style="margin: 0;">Gender:</h4>
+        <div class="checkbox-group">
+            <label for="gender_male" style="display: flex; flex-direction: row;">Male
+                <input type="radio" id="gender_male" name="gender" value="Male">
+            </label>
+            <label for="gender_female">Female
+                <input type="radio" id="gender_female" name="gender" value="Female">
+            </label>
+            <label for="gender_other">Other
+                <input type="radio" id="gender_other" name="gender" value="Other">
+            </label>
+        </div>
+        <div class="checkbox-group">
+            <label for="student" style="display: flex;flex-direction: row; margin: 0px;font-weight: bold;">
+                Student at 42:
+                <input type="checkbox" id="student" name="student">
+            </label>
+        </div>
+        <div style="display: flex; justify-content: center; align-content: center;">
+            <button style="width: 5vw;;" type="submit" onclick="displayFormContents()">Send form</button>
+        </div>
+    </form>
+    <script src="./popup.js"></script>
+</body>
+</html>
