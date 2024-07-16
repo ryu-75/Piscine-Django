@@ -2,6 +2,7 @@ import sys
 
 def all_in():
     if len(sys.argv) - 1 < 1:
+        print(f"Usage: {sys.argv[0]} 'OrEgon, Salem, PaRiS,     , etc...'")
         exit(1)
         
     states = {
@@ -38,4 +39,9 @@ def separate_arguments(args):
     return [[word] for word in args.replace(',', ' ').split()]
     
 # ************************************************************************************************
-all_in()
+
+def main():
+    all_in()
+    
+if __name__ == '__main__':
+    main()

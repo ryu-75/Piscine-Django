@@ -20,8 +20,8 @@ def capital_city():
 
     state_name = sys.argv[1]
 
-    if state_name in states and states[state_name] in capital_cities:
-        print(f"{capital_cities[states[state_name]].}")
+    if state_name.capitalize() in states and states[state_name.capitalize()] in capital_cities:
+        print(f"{capital_cities[states[state_name.capitalize()]]}")
     else:
         print("Unknown state")
 

@@ -17,12 +17,13 @@ def state():
         "NJ": "Trenton",
         "CO": "Denver"
     }
-
-    if sys.argv[1] in states and states[sys.argv[1]] in capital_cities:
-        print(capital_cities[states[sys.argv[1]]])
-    elif sys.argv[1] in capital_cities.values():
+    arg = sys.argv[1]
+    
+    if arg.capitalize() in states and states[arg.capitalize()] in capital_cities:
+        print(capital_cities[states[arg.capitalize()]])
+    elif arg.capitalize() in capital_cities.values():
         for capital_acronym, city in capital_cities.items():
-            if city == sys.argv[1]:
+            if city == arg.capitalize():
                 for state, state_acronym in states.items():
                     if state_acronym == capital_acronym:
                         print(state)

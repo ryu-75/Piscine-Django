@@ -84,4 +84,8 @@ def periodic_table_html(filename):
     
     html.close()
 
-periodic_table_html("periodic_table.txt")
+def main():
+    periodic_table_html("periodic_table.txt")
+    
+if __name__ == '__main__':
+    main()
