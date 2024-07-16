@@ -26,7 +26,7 @@ def create_dict():
     dic = {}
     for name, year in d:
         dic[year] = name
-    
+
     return dic
 
 # ****************************************************************
@@ -38,4 +38,8 @@ def display_dict():
 
 # ****************************************************************
 
-display_dict()
+def main():
+    display_dict()
+
+if __name__ == '__main__' :
+    main()

@@ -10,9 +10,14 @@ def my_var():
         "tup": (42,),
         "setting": set()
     }
-    for i in content:
-        print(content[i], "est de type", type(content))
+    for key, value in content.items():
+        print(f"{value} est de type {type(value)}")
 
 # ****************************************************************
 
-my_var()
+def main():
+    my_var()
+    return 0
+
+if __name__ == '__main__':
+    main()

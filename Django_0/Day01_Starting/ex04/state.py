@@ -2,8 +2,9 @@ import sys
 
 def state():
     if len(sys.argv) - 1 != 1:
+        print(f"Usage: {sys.argv[0]} <STATE or CITY>")
         exit(1)
-    
+
     states = {
         "Oregon" : "OR",
         "Alabama" : "AL",
@@ -16,7 +17,7 @@ def state():
         "NJ": "Trenton",
         "CO": "Denver"
     }
-    
+
     if sys.argv[1] in states and states[sys.argv[1]] in capital_cities:
         print(capital_cities[states[sys.argv[1]]])
     elif sys.argv[1] in capital_cities.values():
@@ -27,7 +28,11 @@ def state():
                         print(state)
     else:
         print("Unknown state")
-            
+
 #************************************************************************************************
 
-state()
+def main():
+    state()
+
+if __name__ == '__main__' :
+    main()
