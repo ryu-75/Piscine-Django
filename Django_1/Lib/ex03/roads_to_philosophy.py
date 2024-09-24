@@ -13,15 +13,11 @@ if __name__ == '__main__':
         
         if r.status_code == 200:
             soup = BeautifulSoup(r.text, 'html.parser')
-            i = 0
-            txt = soup.find('body')
-            if txt:
-                filter_html = filter('<i>', txt)
-                
-                print(filter_html)
-                for link in txt.find('a'):
-                    print(link.find('href'))
-                
+            for link in soup.find_all('a'):
+                el = link.get('href')
+                if type(el) is not str or el.find("https") == -1:
+                    continue
+                print(el)
                 
                 # file = open(f"{sys.argv[1]}.html", "w")
                 # file.write(el[0])
