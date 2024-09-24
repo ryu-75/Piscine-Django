@@ -26,8 +26,8 @@ def main():
 	print(f"InternA : ", internA.__str__())
 	print(f"InternB : ", internB.__str__())
 
+	print(f"InternA : ", internA.work())
 	print(f"InternB : ", internB.make_coffee())
-	print(f"InternA : ", internA.make_coffee().work())
 
 if __name__ == '__main__':
 	main()

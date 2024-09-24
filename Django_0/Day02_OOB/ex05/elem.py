@@ -76,7 +76,9 @@ class Elem:
             return ''
         result = '\n'
         for elem in self.content:
-            result += f'  {str(elem).replace('\n', '\n  ')}\n'
+            elem_string = str(elem)
+            replace_string = elem_string.replace("\n", "\n  ")
+            result += f'  {replace_string}\n'
         return result
 
     def add_content(self, content):

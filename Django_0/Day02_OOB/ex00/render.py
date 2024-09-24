@@ -1,4 +1,4 @@
-from setting import name
+from setting import name, age, first, job, title
 import	sys
 import  os
 
@@ -19,10 +19,13 @@ def edit_file():
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>myCV</title>
+    <title>{title}</title>
 </head>
 <body>
     {template.replace("{name}", name)}
+    <p>What is your firstname ? {first}</p>
+    <p>How old are you ? {age} years old</p>
+    <p>Ok, then. What is your job ? I'm a {job}</p> 
 </body>
 </html>
 ''')

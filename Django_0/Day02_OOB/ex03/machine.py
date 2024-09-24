@@ -3,7 +3,7 @@ import random
 from beverages import HotBeverage, Coffee, Cappuccino, Tea, Chocolate
 
 class CoffeeMachine:
-	drinks = 0
+	drinks = 1
 
 	def __init__(self):
 		pass
@@ -35,13 +35,23 @@ class CoffeeMachine:
 def main():
 	coffee_machine = CoffeeMachine()
 	coffee = Coffee("coffee", 0.50)
+	cappuccino = Cappuccino("cappuccino", 0.45)
+	chocolate = Chocolate("chocolate", 0.60)
+	tea = Tea("tea", 0.30)
+	hot_beverage = HotBeverage("hot beverage", 0.30)
 	i = 0
 
 	while coffee_machine.drinks <= 10:
 		if (i == 20):
 			break
 		print(f"drinks: {coffee_machine.drinks}")
-		print(coffee_machine.serve(coffee))
+		print(random.choice((
+      						coffee_machine.serve(coffee), 
+                       		coffee_machine.serve(chocolate), 
+                          	coffee_machine.serve(cappuccino), 
+                            coffee_machine.serve(tea), 
+			    			coffee_machine.serve(hot_beverage)
+          				)))
 		if (coffee_machine.drinks == 10):
 			print(coffee_machine.repair())
 		coffee_machine.drinks +=1

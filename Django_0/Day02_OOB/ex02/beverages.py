@@ -69,7 +69,7 @@ def main():
 	print()
 
 	# Cappuccino *************************************
-	cappuccino = Cappuccino("cappuccino", 0.50)
+	cappuccino = Cappuccino("cappuccino", 0.45)
 	print(cappuccino.__str__())
 
 if __name__ == '__main__':
