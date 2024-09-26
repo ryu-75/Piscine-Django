@@ -99,4 +99,10 @@ echo -e "✅ ${GREEN}requirements.txt is created!${RESET}"
 echo "================================================================"
 
 echo "🎉 All tasks completed successfully! 🎉"
+echo "================================================================"
+echo "⏳ Server pending... ⏳"
+
+python manage.py runserver
+echo "================================================================"
+echo "⏹️ Server's stopped ⏹️"
 
