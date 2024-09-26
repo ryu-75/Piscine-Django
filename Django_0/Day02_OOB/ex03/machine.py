@@ -3,7 +3,7 @@ import random
 from beverages import HotBeverage, Coffee, Cappuccino, Tea, Chocolate
 
 class CoffeeMachine:
-	drinks = 1
+	drinks = 0
 
 	def __init__(self):
 		pass
@@ -25,8 +25,7 @@ class CoffeeMachine:
 
 	def serve(self, beverage):
 		if (self.drinks == 10):
-			exc = CoffeeMachine.BrokenMachineException
-			return exc()
+			raise CoffeeMachine.BrokenMachineException
 		elif (round(random.random()) == 1):
 			return beverage
 		return CoffeeMachine.EmptyCup()
@@ -39,23 +38,26 @@ def main():
 	chocolate = Chocolate("chocolate", 0.60)
 	tea = Tea("tea", 0.30)
 	hot_beverage = HotBeverage("hot beverage", 0.30)
-	i = 0
+	i = 1
 
 	while coffee_machine.drinks <= 10:
-		if (i == 20):
-			break
-		print(f"drinks: {coffee_machine.drinks}")
-		print(random.choice((
-      						coffee_machine.serve(coffee), 
-                       		coffee_machine.serve(chocolate), 
-                          	coffee_machine.serve(cappuccino), 
-                            coffee_machine.serve(tea), 
-			    			coffee_machine.serve(hot_beverage)
-          				)))
-		if (coffee_machine.drinks == 10):
+		try:
+			if (coffee_machine.drinks != 10):
+				if (i == 20):
+					break
+				coffee_machine.drinks +=1
+				i += 1
+				print(f"drinks: {coffee_machine.drinks}")
+				print(random.choice((
+      								coffee_machine.serve(coffee), 
+        		               		coffee_machine.serve(chocolate), 
+        		                  	coffee_machine.serve(cappuccino), 
+        		                    coffee_machine.serve(tea), 
+					    			coffee_machine.serve(hot_beverage)
+        		  				)))
+		except coffee_machine.BrokenMachineException as e:
+			print(f"{e}")
 			print(coffee_machine.repair())
-		coffee_machine.drinks +=1
-		i += 1
 
 if __name__ == "__main__":
 	main()
