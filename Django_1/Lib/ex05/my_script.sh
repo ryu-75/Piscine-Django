@@ -70,9 +70,6 @@ echo "================================================================"
 echo "🚀 Installing psycopg2..."
 pip install psycopg2-binary
 
-test=$(pip show psycopg2-binary > /dev/null 2>&1)
-echo $test
-
 if pip show psycopg2-binary > /dev/null 2>&1; then
     echo -e "✅ ${GREEN}psycopg2 is installed!${RESET}"
 else
@@ -105,4 +102,4 @@ echo "⏳ Server pending... ⏳"
 python manage.py runserver
 echo "================================================================"
 echo "⏹️ Server's stopped ⏹️"
-
+deactivate

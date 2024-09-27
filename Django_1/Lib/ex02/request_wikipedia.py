@@ -28,4 +28,4 @@ if __name__ == '__main__':
                 create.write(wiki_text)
                 create.close()
             else:
-                print("They is not revisions in data")
+                print(f"`{sys.argv[1]}` not exist in wikipedia's content")
