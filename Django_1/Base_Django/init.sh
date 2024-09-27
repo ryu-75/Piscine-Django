@@ -93,6 +93,32 @@ else
     echo -e "🚀 ${YELLOW}psycopg2 updated to $latest_version!${RESET}"
 fi
 echo "================================================================"
+echo "🚀 Installing markdown..."
+pip install markdown
+
+test=$(pip show markdown > /dev/null 2>&1)
+echo $test
+
+if pip show markdown > /dev/null 2>&1; then
+    echo -e "✅ ${GREEN}markdown is installed!${RESET}"
+else
+    echo -e "❌ ${RED}markdown to install psycopg2${RESET}"
+    exit 1
+fi
+
+# Get the installed version of Django
+installed_version=$(pip show markdown | grep Version | awk '{print $2}')
+# Get the latest version of Django from PyPI
+latest_version=$(pip install markdown --upgrade | grep "Requirement already satisfied: markdown in" | awk '{print $7}' | tr -d '()')
+
+if [ $latest_version = $installed_version ]; then
+    echo -e "✅ ${GREEN}markdown is already up to date!${RESET}"
+else
+    echo -e "🔄 ${YELLOW}markdown is outdated! Updating...${RESET}"
+    pip install --upgrade markdown
+    echo -e "🚀 ${YELLOW}markdown updated to $latest_version!${RESET}"
+fi
+echo "================================================================"
 echo "📝 Creating a requirements.txt..."
 pip freeze > requirements.txt
 echo -e "✅ ${GREEN}requirements.txt is created!${RESET}"

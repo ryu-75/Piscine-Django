@@ -1,5 +1,3 @@
-from django.views.generic import ListView
-
-
-class Ex00(ListView):
-    template_name = "index.html"
+from django.shortcuts import render
+def ex00(request):
+    return render(request, 'ex00/index.html')

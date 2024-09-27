@@ -1,0 +1,522 @@
+<!-- template/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<<<<<<< HEAD:Django_1/Base_Django/ex00/template/index.html
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex00 : Markdown Cheatsheet.</title>
+  </head>
+  <body>
+    <div class="clearfix container-xl px-3 px-md-4 px-lg-5 mt-4 page"
+      id="wiki-wrapper">
+      <div class="d-flex flex-column flex-md-row gh-header">
+        <h1
+          class="flex-auto min-width-0 mb-2 mb-md-0 mr-0 mr-md-2 gh-header-title">
+          Markdown Cheatsheet
+        </h1>
+        <div class="mt-4" id="wiki-content">
+          <div
+            class="Layout Layout--flowRow-until-md Layout--sidebarPosition-end Layout--sidebarPosition-flowRow-end"
+            data-view-component="true">
+            <div class="Layout-main" data-view-component="true">
+              <div class="gollum-markdown-content" id="wiki-body">
+                <div class="markdown-body">
+                  <p>
+                    This is intended as a quick reference and showcase. For more
+                    complete info, see
+                    <a href="http://daringfireball.net/projects/markdown/"
+                      rel="nofollow">
+                      John Gruber's original spec
+                    </a>
+                    and the
+                    <a
+                      href="http://github.github.com/github-flavored-markdown/">
+                      Github-flavored Markdown info page
+                    </a>
+                    .
+                  </p>
+                  <p>
+                    Note that there is also a
+                    <a href="./Markdown-Here-Cheatsheet">
+                      Cheatsheet specific to Markdown Here
+                    </a>
+                    if that's what you're looking for. You can also check out
+                    <a href="./Other-Markdown-Tools">
+                      more Markdown tools
+                    </a>
+                    .
+                  </p>
+                  <div class="markdown-heading">
+                    <h5 class="heading-element">
+                      Table of Contents
+                    </h5>
+                    <a aria-label="Permalink: Table of Contents" class="anchor"
+                      href="#table-of-contents"
+                      id="user-content-table-of-contents">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <p>
+                    <a href="#headers">
+                      Headers
+                    </a>
+                    <br />
+                    <a href="#emphasis">
+                      Emphasis
+                    </a>
+                    <br />
+                    <a href="#lists">
+                      Lists
+                    </a>
+                    <br />
+                    <a href="#links">
+                      Links
+                    </a>
+                    <br />
+                    <a href="#images">
+                      Images
+                    </a>
+                    <br />
+                    <a href="#code">
+                      Code and Syntax Highlighting
+                    </a>
+                    <br />
+                    <a href="#footnotes">
+                      Footnotes
+                    </a>
+                    <br />
+                    <a href="#tables">
+                      Tables
+                    </a>
+                    <br />
+                    <a href="#blockquotes">
+                      Blockquotes
+                    </a>
+                    <br />
+                    <a href="#html">
+                      Inline HTML
+                    </a>
+                    <br />
+                    <a href="#hr">
+                      Horizontal Rule
+                    </a>
+                    <br />
+                    <a href="#lines">
+                      Line Breaks
+                    </a>
+                    <br />
+                    <a href="#videos">
+                      YouTube Videos
+                    </a>
+                  </p>
+                  <a name="user-content-headers">
+                  </a>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      Headers
+                    </h2>
+                    <a aria-label="Permalink: Headers" class="anchor"
+                      href="#headers" id="user-content-headers">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div
+                    class="snippet-clipboard-content notranslate position-relative overflow-auto"
+                    data-snippet-clipboard-copy-content="# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------">
+                    <pre class="notranslate" lang="no-highlight"><code># H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+</code></pre>
+                  </div>
+                  <div class="markdown-heading">
+                    <h1 class="heading-element">
+                      H1
+                    </h1>
+                    <a aria-label="Permalink: H1" class="anchor" href="#h1"
+                      id="user-content-h1">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      H2
+                    </h2>
+                    <a aria-label="Permalink: H2" class="anchor" href="#h2"
+                      id="user-content-h2">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h3 class="heading-element">
+                      H3
+                    </h3>
+                    <a aria-label="Permalink: H3" class="anchor" href="#h3"
+                      id="user-content-h3">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h4 class="heading-element">
+                      H4
+                    </h4>
+                    <a aria-label="Permalink: H4" class="anchor" href="#h4"
+                      id="user-content-h4">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h5 class="heading-element">
+                      H5
+                    </h5>
+                    <a aria-label="Permalink: H5" class="anchor" href="#h5"
+                      id="user-content-h5">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h6 class="heading-element">
+                      H6
+                    </h6>
+                    <a aria-label="Permalink: H6" class="anchor" href="#h6"
+                      id="user-content-h6">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <p>
+                    Alternatively, for H1 and H2, an underline-ish style:
+                  </p>
+                  <div class="markdown-heading">
+                    <h1 class="heading-element">
+                      Alt-H1
+                    </h1>
+                    <a aria-label="Permalink: Alt-H1" class="anchor"
+                      href="#alt-h1" id="user-content-alt-h1">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      Alt-H2
+                    </h2>
+                    <a aria-label="Permalink: Alt-H2" class="anchor"
+                      href="#alt-h2" id="user-content-alt-h2">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <a name="user-content-emphasis">
+                  </a>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      Emphasis
+                    </h2>
+                    <a aria-label="Permalink: Emphasis" class="anchor"
+                      href="#emphasis" id="user-content-emphasis">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <div
+                    class="snippet-clipboard-content notranslate position-relative overflow-auto"
+                    data-snippet-clipboard-copy-content="Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~">
+                    <pre class="notranslate"
+                      lang="no-highlight"><code>Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+</code></pre>
+                  </div>
+                  <p>
+                    Emphasis, aka italics, with
+                    <em>
+                      asterisks
+                    </em>
+                    or
+                    <em>
+                      underscores
+                    </em>
+                    .
+                  </p>
+                  <p>
+                    Strong emphasis, aka bold, with
+                    <strong>
+                      asterisks
+                    </strong>
+                    or
+                    <strong>
+                      underscores
+                    </strong>
+                    .
+                  </p>
+                  <p>
+                    Combined emphasis with
+                    <strong>
+                      asterisks and
+                      <em>
+                        underscores
+                      </em>
+                    </strong>
+                    .
+                  </p>
+                  <p>
+                    Strikethrough uses two tildes.
+                    <del>
+                      Scratch this.
+                    </del>
+                  </p>
+                  <a name="user-content-lists">
+                  </a>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      Lists
+                    </h2>
+                    <a aria-label="Permalink: Lists" class="anchor"
+                      href="#lists" id="user-content-lists">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <p>
+                    (In this example, leading and trailing spaces are shown with
+                    with dots: ⋅)
+                  </p>
+                  <div
+                    class="snippet-clipboard-content notranslate position-relative overflow-auto"
+                    data-snippet-clipboard-copy-content="1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses">
+                    <pre class="notranslate"
+                      lang="no-highlight"><code>1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+</code></pre>
+                  </div>
+                  <ol>
+                    <li>
+                      First ordered list item
+                    </li>
+                    <li>
+                      Another item
+                    </li>
+                  </ol>
+                  <ul>
+                    <li>
+                      Unordered sub-list.
+                    </li>
+                  </ul>
+                  <ol>
+                    <li>
+                      <p>
+                        Actual numbers don't matter, just that it's a number
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Ordered sub-list
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        And another item.
+                      </p>
+                      <p>
+                        You can have properly indented paragraphs within list
+                        items. Notice the blank line above, and the leading
+                        spaces (at least one, but we'll use three here to also
+                        align the raw Markdown).
+                      </p>
+                      <p>
+                        To have a line break without a paragraph, you will need
+                        to use two trailing spaces.
+                        <br />
+                        Note that this line is separate, but within the same
+                        paragraph.
+                        <br />
+                        (This is contrary to the typical GFM line break
+                        behaviour, where trailing spaces are not required.)
+                      </p>
+                    </li>
+                  </ol>
+                  <ul>
+                    <li>
+                      Unordered list can use asterisks
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      Or minuses
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      Or pluses
+                    </li>
+                  </ul>
+                  <a name="user-content-links">
+                  </a>
+                  <div class="markdown-heading">
+                    <h2 class="heading-element">
+                      Links
+                    </h2>
+                    <a aria-label="Permalink: Links" class="anchor"
+                      href="#links" id="user-content-links">
+                      <svg aria-hidden="true" class="octicon octicon-link"
+                        height="16" version="1.1" viewbox="0 0 16 16"
+                        width="16">
+                        <path
+                          d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">
+                        </path>
+                      </svg>
+                    </a>
+                  </div>
+                  <p>
+                    There are two ways to create links.
+                  </p>
+                  <div
+                    class="snippet-clipboard-content notranslate position-relative overflow-auto"
+                    data-snippet-clipboard-copy-content="[I'm an inline-style
+                    link](https://www.google.com)"></div>
+                </body>
+              </html>
+=======
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Markdown Cheatsheet</title>
+    </head>
+<body>
+    <div>
+        <h1>Markdown Cheatsheet</h1>
+    </div>
+</body>
+</html>
+>>>>>>> 3a8350801491217c72265e346cda13622b5b92a2:Django_1/Base_Django/ex00/templates/ex00/index.html
