@@ -1,0 +1,14 @@
+<!-- templates/django.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="device-width, initial-scale=1.0">
+    <title>{{ markdown_content.title }}</title>
+    <style>{{ mardown_content.style }}</style>
+</head>
+<body>
+    <h1>{{ markdown_content.title }}</h1>
+    <div>{{ markdown_content.content| safe }}</div>     <!-- safe: Django's built-in filter to displayed HTML content  -->
+</body>
+</html>
