@@ -1,0 +1,21 @@
+{% extends 'ex01/base.html' %} {% load static %}
+{% block title %}
+<title>Ex01 : Django, framework web.</title>
+{% endblock title %} {% block content %}
+<div role='main' class="style1">
+    <h1>How to displaying a static page in Django</h1>
+    <article>
+        <ul>
+            <li><b>Project Creation</b>: Initiate a new Django project.</li>
+            <li><b>App Creation</b>: Create an app within the project.</li>
+            <li><b>Template Definition</b>: Design a static HTML template.</li>
+            <li><b>Template Configuration</b>: Set up template directories in settings.</li>
+            <li><b>View Definition</b>: Implement a view function to render the template.</li>
+            <li><b>URL Routing</b>: Establish URL patterns to connect views to URLs.</li>
+            <li><b>Request Handling</b>: Django receives an HTTP request for the specified URL.</li>
+            <li><b>Response Generation</b>: The view processes the request and renders the template.</li>
+            <li><b>Response Delivery</b>: The rendered HTML is returned as an HTTP response to the client.</li>
+        </ul>
+    </article>
+</div>
+{% endblock %}

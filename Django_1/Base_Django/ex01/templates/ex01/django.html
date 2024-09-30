@@ -1,0 +1,44 @@
+{% extends 'ex01/base.html' %}
+{% block title %}
+<title>Ex01 : Django, framework web.</title>
+{% endblock title %} {% block content %}
+<div role='main' class="style1">
+    <h1>Django Overview</h1>
+    <p>
+        <b>Django</b> is a high-level Python web framework that encourages rapid development and clean, pragmatic design. </br>
+        It's known for being highly scalable, secure, and customizable, making it a popular choice for web developers.
+    </p>
+    <article>
+        <h2>Key Features: </h2>
+        <ul>
+            <li><b>DRY Principle (Don't Repeat Yourself)</b>: Encourages reusability of code, making development faster and more efficient.</li>
+            <li><b>Built-in Admin Interface</b>: Simplifies content management.</li>
+            <li><b>Security</b>: Includes protection against common vulnerabilities like SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF).</li>
+            <li><b>Scalability</b>: Supports large-scale applications.</li>
+            <li><b>ORM (Object-Relational Mapping)</b>: Simplifies database queries and operations.</li>
+        </ul>
+    </article>
+    <article>
+        <h2>Historic of Django: </h2>
+        <ul>
+            <li>
+                <b>2003</b>: Django was initially developed by <b>Adrian Holovaty</b> and <b>Simon Willison</b> while working at a local newspaper in Kansas, USA. 
+                They needed a fast, flexible tool to build web applications.
+            </li>
+            <li>
+                <b>2005</b>: The framework was released as open-source software under the BSD license, and named Django after the famous jazz guitarist, Django Reinhardt. 
+                It gained popularity because of its speed, security, and developer-friendly features.
+            </li>
+            <li>
+                <b>2008</b>: Django Software Foundation (DSF) was established to support the growth and management of the framework. 
+                This further solidified Django’s position as a community-driven project.
+            </li>
+            <li>
+                <b>2010 and beyond</b>: Django continued evolving, with regular releases improving performance, security, and usability. 
+                It remains one of the top frameworks used in modern web development today, powering large websites like Instagram, Pinterest, and Mozilla.
+            </li>
+        </ul>
+        <p>Django’s growth over the years has been marked by its adaptability and focus on making web development faster and easier, while maintaining a strong emphasis on clean, secure, and scalable design.</p>
+    </article>
+</div>
+{% endblock %}

@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
-from .models import MarkdownContent
+from django.shortcuts import render
 
-# base template
-def html_render(request, slug):
-    markdown_content = get_object_or_404(MarkdownContent, slug=slug)
-    context = {"markdown_content": markdown_content}
-    return render(request, 'ex01/base.html', context=context)
+def display(request):
+    return render(request, 'ex01/display.html')
 
+def templates(request):
+    return render(request, 'ex01/templates.html')
+
+def django(request):
+    return render(request, 'ex01/django.html')

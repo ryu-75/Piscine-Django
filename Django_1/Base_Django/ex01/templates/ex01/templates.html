@@ -1,0 +1,52 @@
+{% extends 'ex01/base.html' %} {% load static %}
+{% block title %}
+<title>Ex01 : Django, framework web.</title>
+{% endblock title %} {% block style %}
+<link rel="stylesheet" href="{% static 'styles/style2.css' %}">
+{% endblock style %} {% block content %}
+<div role='main' class="style2">
+    <h1>Django's Default Template Engine</h1>
+    <article>
+        <h2>Blocks</h2>
+        <ul>
+            <li>
+                <b>Definition</b>: Blocks are defined sections within a template that can be overridden in child templates. 
+                They allow for code reuse and modular design in templates.
+            </li>
+            <li>
+                <b>Usage</b>: Blocks are created using the "{% block block_name %}" and "{% endblock %}" tags. 
+                Child templates can extend parent templates and replace these blocks with specific content.
+            </li>
+        </ul>
+        <h2>"for ... in" Loops</h2>
+        <ul>
+            <li>
+                <b>Definition</b>: The "for ... in" loop allows iterating over iterable objects such as lists or querysets.
+            </li>
+            <li>
+                <b>Usage</b>: It is used within templates to dynamically generate content based on the elements of an iterable. 
+                The syntax is "{% for item in iterable %}" ... "{% endfor %}", where item represents the current element in the loop.
+            </li>
+        </ul>
+        <h2>"if" Control Structures</h2>
+        <ul>
+            <li>
+                <b>Definition</b>: The if control structure allows for conditional rendering of content based on specific conditions.
+            </li>
+            <li>
+                <b>Usage</b>: It is defined using "{% if condition %}" and "{% endif %}" tags. 
+                This structure enables the display of different content based on the truthiness of conditions, allowing for dynamic behavior within the template.
+            </li>
+        </ul>
+        <h2>Displaying Context Variables</h2>
+        <ul>
+            <li>
+                <b>Definition</b>: Context variables are passed from the view to the template, enabling dynamic content rendering.
+            </li>
+            <li>
+                <b>Usage</b>: Variables can be displayed in templates using the double curly braces syntax, "{{ variable_name }}". This will output the value of the variable in the rendered HTML.
+            </li>
+        </ul>
+    </article>
+</div>
+{% endblock %}
