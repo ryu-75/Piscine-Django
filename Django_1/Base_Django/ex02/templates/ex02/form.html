@@ -1,0 +1,20 @@
+<!-- ex02/form.html -->
+{% extends 'ex02/base.html' %}
+{% block content %}
+<div class="content">
+    <div class="form-content">
+        <h1 style="margin-bottom: 1rem;">Formular</h1>
+        <form action="" method="post">
+            <!-- https://docs.djangoproject.com/fr/5.1/ref/csrf/ -->
+            {% csrf_token %}
+            <!-- Get values from forms.py -->
+            {{ form }}
+            <input type="submit" value="Submit" class="btn">
+        </form>
+        <h2 style="margin-top: 2rem;">History</h2>
+        {% for history in historys %}
+        <p style="padding: 0.5em;">{{ history }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

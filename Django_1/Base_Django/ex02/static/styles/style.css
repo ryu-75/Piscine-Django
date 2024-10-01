@@ -1,0 +1,46 @@
+* {
+    margin: 0
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+}
+
+.form-content {
+    border: solid 2px;
+    border-radius: 16px 12px 16px 12px;
+    padding: 4rem;
+}   
+
+.form-content input {
+    width: 100%;
+    margin-top : 5px;
+    margin-bottom: 5px;
+}
+
+.form-content .btn {
+    width: 50%;
+    text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
