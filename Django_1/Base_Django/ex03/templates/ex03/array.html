@@ -1,0 +1,31 @@
+<!-- ex03/array.html -->
+{% extends 'ex03/base.html' %}
+{% block style %}{% endblock style %}
+{% block title %}
+<title>Ex03: Array</title>
+{% endblock title %}
+{% block content %}
+<h1 style="text-align: center;">Array</h1>
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Firstname</th>
+                <th>Devil fruit</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, member in data.items %}
+            <tr>
+                <td>{{ member.0 }}</td>  <!-- Last Name -->
+                <td>{{ member.1 }}</td>  <!-- First Name -->
+                <td>{{ member.3 }}</td>  <!-- Devil Fruit -->
+                <td>{{ member.2 }}</td>  <!-- Role -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

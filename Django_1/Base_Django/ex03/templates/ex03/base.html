@@ -1,0 +1,14 @@
+<!-- ex03/base.html -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=width-device, initial-scale=1.0">    
+        {% block title %}{% endblock title %}
+        <link rel="stylesheet" href="{% static 'styles/ex03.css' %}">
+    </head>
+    <body>
+        {% block content %}{% endblock content%}
+    </body>
+</html>
