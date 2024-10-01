@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ex00.apps.Ex00Config',
     'ex01.apps.Ex01Config',
+    'ex02.apps.Ex02Config',
+    'ex03.apps.Ex03Config'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,62 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+HISTORY_LOG_FILE = BASE_DIR / "ex02/form.log"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    # Defining the format of log messages
+    'formatters': {
+        # Logging formatter includes detailed information in the log messages
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+        # More straightforward and includes only the log level and the log message
+        'history_format': {
+            'format': '[{asctime}] {message}',
+            'style': '{'
+        },
+    },
+    # Determine where the log messages are to be displayed or stored
+    'handlers': {
+        # The file handler writes the log messages to a file named
+        # It captures all messages with a DEBUG level or higher and formats them
+        # using the verbose formatter
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'history_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': HISTORY_LOG_FILE,
+            'formatter': 'history_format'
+        }
+    },
+    # Section defines the loggers for the application
+    'loggers': {
+        # Configured to use both the file and console handlers. 
+        # It will capture all messages at the DEBUG level or higher.
+        # Every log message from Django will be written to both the debug file and to the console
+        'django': {
+            'handlers': ['history_file'],
+            'level': 'INFO',
+            'propagate': True
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
