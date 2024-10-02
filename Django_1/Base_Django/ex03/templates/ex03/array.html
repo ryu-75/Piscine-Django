@@ -1,28 +1,28 @@
-<!-- ex03/array.html -->
+    <!-- ex03/array.html -->
 {% extends 'ex03/base.html' %}
 {% block style %}{% endblock style %}
 {% block title %}
-<title>Ex03: Array</title>
+<title>Ex03: Fifty shades of bic</title>
 {% endblock title %}
 {% block content %}
-<h1 style="text-align: center;">Array</h1>
+<h1 style="text-align: center;">Mugiwara</h1>
 <div class="content">
-    <table>
+    <table style="color: white;">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Firstname</th>
-                <th>Devil fruit</th>
-                <th>Role</th>
+                <th style=" background-color: rgb(0, 0, 0);">Name</th>
+                <th style=" background-color: rgb(180, 0, 0);">Firstname</th>
+                <th style=" background-color: rgb(0, 180, 0);">Devil fruit</th>
+                <th style=" background-color: rgb(0, 0, 180);">Role</th>
             </tr>
         </thead>
         <tbody>
             {% for key, member in data.items %}
             <tr>
-                <td>{{ member.0 }}</td>  <!-- Last Name -->
-                <td>{{ member.1 }}</td>  <!-- First Name -->
-                <td>{{ member.3 }}</td>  <!-- Devil Fruit -->
-                <td>{{ member.2 }}</td>  <!-- Role -->
+                <td style=" background-color: rgb({{forloop.counter}}, {{forloop.counter}}, {{forloop.counter}});">{{ member.0 }}</td>  <!-- Last Name -->
+                <td style=" background-color: rgb(180, {{forloop.counter}}, {{forloop.counter}});">{{ member.1 }}</td>  <!-- First Name -->
+                <td style=" background-color: rgb({{forloop.counter}}, 180, {{forloop.counter}});">{{ member.3 }}</td>  <!-- Devil Fruit -->
+                <td style=" background-color: rgb({{forloop.counter}}, {{forloop.counter}}, 180);">{{ member.2 }}</td>  <!-- Role -->
             </tr>
             {% endfor %}
         </tbody>
