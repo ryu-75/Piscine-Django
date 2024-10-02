@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block title %}{% endblock title %}
         <link rel="stylesheet" href="{% static 'styles/style1.css' %}">
+        {% block style %}{% endblock style %}
     </head>
 <body>
     {% include 'ex01/nav.html' %}{% block content %}{% endblock %}
