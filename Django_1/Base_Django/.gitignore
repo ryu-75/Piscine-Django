@@ -1,5 +1,12 @@
 # Python
-__pycache__
+ex00/__pycache__
+ex01/__pycache__
+ex02/__pycache__
+ex03/__pycache__
+ex00/migrations/__pycache__
+ex01/migrations/__pycache__
+ex02/migrations/__pycache__
+ex03/migrations/__pycache__
 
 # Django specific
 *.sqlite3
