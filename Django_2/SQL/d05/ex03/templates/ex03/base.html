@@ -4,9 +4,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SQL - Create a table</title>
+        {% block title %}{% endblock title %}
+        {% block style %}{% endblock style %}
     </head>
 <body>
-    <h1>SQL - Create a table</h1>
+    {% block content %}{% endblock content %}
 </body>
 </html>

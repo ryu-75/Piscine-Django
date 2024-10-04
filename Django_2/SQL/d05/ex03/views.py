@@ -1,8 +1,8 @@
 from django.shortcuts import render
+from django.conf import settings
 from django.http import HttpResponse
 import psycopg2, os
 from dotenv import load_dotenv
-from django.conf import settings
 
 load_dotenv(os.path.join(settings.BASE_DIR, '.env'))
 
@@ -12,31 +12,7 @@ service = os.getenv('DB_SERVICE')
 host = os.getenv('DB_HOST')
 password = os.getenv('DB_PWD')
 
-TABLE_NAME = 'ex02_movies'
-def init(request):
-    try:
-        # Connect to an existing database
-        conn = psycopg2.connect(database=database, port=port, host=host, password=password, service=service)
-        ("Movies table doesn't exist, table creation process...")
-        TABLE_MOVIES = '''
-            CREATE TABLE ex02_movies (
-                episode_nb INT PRIMARY KEY,
-                title VARCHAR(64) UNIQUE NOT NULL,
-                director VARCHAR(32) NOT NULL,
-                producer VARCHAR(128) NOT NULL,
-                release_date DATE NOT NULL
-            )
-        '''
-        # Open a cursor to perform database operations
-        cur = conn.cursor()
-        with cur as curs:
-            curs.execute(TABLE_MOVIES)
-        conn.commit()
-        conn.close()
-        return HttpResponse('OK')
-    except Exception as e:
-        return HttpResponse(f'{e}')
-    
+TABLE_NAME = 'ex03_movies'
 def populate(request):
     try:
         conn = psycopg2.connect(database=database, port=port, host=host, password=password, service=service)
@@ -92,6 +68,7 @@ def populate(request):
             }
         ]
         
+        ret = []
         INSERT_DATA = '''
             INSERT INTO {table_name}(
                 episode_nb,
@@ -103,41 +80,37 @@ def populate(request):
                 %s, %s, %s, %s, %s
             );
         '''.format(table_name=TABLE_NAME)
-        ret = []
-        with conn.cursor() as curs:
+        with conn.cursor() as cur:
             for movie in movies:
                 try:
-                    curs.execute(
-                        INSERT_DATA,
-                        [
+                    cur.execute(
+                        INSERT_DATA, [
                             movie['episode_nb'],
                             movie['title'],
                             movie['director'],
                             movie['producer'],
                             movie['release_date'],
-                        ]
-                    )
+                        ])
                     conn.commit()
                     ret.append('OK')
                 except psycopg2.DatabaseError as e:
                     conn.rollback()
-                    ret.append(f'Error: {e}')
-        return HttpResponse("<br/>".join(str(i) for i in ret))
+                    ret.append(f'{e}')
+        return HttpResponse('<br/>'.join(str(i) for i in ret))
     except Exception as e:
-        return HttpResponse(f"{e}")
-    
+        return HttpResponse(f'{e}')
+
 def display(request):
     try:
         conn = psycopg2.connect(database=database, port=port, host=host, password=password, service=service)
         
         with conn.cursor() as cur:
             cur.execute('''
-                SELECT episode_nb, title, director, producer, release_date FROM {table_name}  
-            '''.format(table_name=TABLE_NAME)
-            )
+                SELECT episode_nb, title, director, producer, release_date FROM {table_name};
+                '''.format(table_name=TABLE_NAME))
             rows = cur.fetchall()
             cur.close()
             conn.close()
-            return render(request, 'ex02/display.html', {'rows': rows})
+            return render(request, 'ex03/display.html', {'rows': rows})
     except Exception:
         return HttpResponse("No data available")
