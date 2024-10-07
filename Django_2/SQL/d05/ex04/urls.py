@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path 
 from . import views
 
 urlpatterns = [
-    path('init', views.init, name='init'),
-    path('populate', views.populate, name='populate'),
-    path('display', views.display, name='display'),
-    path('remove', views.remove, name='remove')
+    path('init/', views.Init.as_view(), name='init'),
+    path('populate/', views.Populate.as_view(), name='populate'),
+    path('display/', views.Display.as_view(), name='display'),
+    path('remove/', views.Remove.as_view(), name='remove')
 ]
