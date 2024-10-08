@@ -1,0 +1,30 @@
+<!-- ex05/display.html -->{% load static %}
+{% block title %}<title>Star Wars data</title>{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{% static 'styles/style.css' %}">{% endblock style%}
+{% block content %}
+<h1>Star Wars data</h1>
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Episode nb</th>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Producer</th>
+                <th>Release date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td>{{ movie.episode_nb }}</td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.director }}</td>
+                <td>{{ movie.producer }}</td>
+                <td>{{ movie.release_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

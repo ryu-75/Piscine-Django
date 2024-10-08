@@ -1,0 +1,9 @@
+<!-- ex05/remove.html -->
+{% block content %}
+<div>
+  <form method="post" action="{{request.path}}">
+    {% csrf_token %} {{ form.as_table }}
+    <input type="submit" value="Remove" />
+  </form>
+</div>
+{% endblock content %}
