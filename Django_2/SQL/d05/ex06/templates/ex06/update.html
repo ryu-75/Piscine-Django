@@ -1,0 +1,17 @@
+<!-- ex06/update.html -->
+{% block content %}
+<div style="display: block; width: 100%;">
+  <form method="post" action="{{request.path}}">
+    {% csrf_token %}
+    <div style="margin-bottom: 1rem;">
+      <label for="title">{{form.title.label_tag}}</label>
+      {{ form.title }}
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <label for="your_text">{{form.your_text.label_tag}}</label>
+      {{ form.your_text }}
+    </div>
+    <input type="submit" value="Update" />
+  </form>
+</div>
+{% endblock content %}

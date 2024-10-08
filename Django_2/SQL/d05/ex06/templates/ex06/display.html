@@ -1,0 +1,36 @@
+<!-- ex06/display.html -->{% load static %}
+{% block title %}<title>Star Wars data</title>{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{% static 'styles/style.css' %}">{% endblock style%}
+{% block content %}
+<h1>Star Wars data</h1>
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Episode nb</th>
+                <th>Title</th>
+                <th>Opening crawl</th>
+                <th>Director</th>
+                <th>Producer</th>
+                <th>Release date</th>
+                <th>Created</th>
+                <th>Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td>{{ row.4 }}</td>
+                <td>{{ row.5 }}</td>
+                <td>{{ row.6 }}</td>
+                <td>{{ row.7 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
