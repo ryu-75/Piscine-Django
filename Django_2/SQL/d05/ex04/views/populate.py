@@ -67,41 +67,37 @@ movies = [
             ]
 
 class Populate(View):
-    conn = psycopg2.connect(database=name, password=pwd, port=port, host=host)
-    
     def get(self, request):
+        conn = psycopg2.connect(database=name, password=pwd, port=port, host=host)
         try:
             ret = []
-            INSERT_INTO = '''
-                INSERT INTO {table_name} (
+            INSERT_TABLE = '''INSERT INTO {table_name} (
                                 episode_nb, 
                                 title, 
                                 director, 
                                 producer, 
                                 release_date
                             ) VALUES (
-                                %s, %s, %s, %s, %s
-                            )
-                '''.format(table_name=TABLE_NAME)
-            with self.conn.cursor() as cur:
+                                %s,
+                                %s,
+                                %s,
+                                %s,
+                                %s);'''.format(table_name=TABLE_NAME)
+            with conn.cursor() as cur:
                 for movie in movies:
                     try:
-                        cur.execute(
-                            INSERT_INTO, [
-                                movie['episode_nb'],
-                                movie['title'],
-                                movie['director'],
-                                movie['producer'],
-                                movie['release_date']
-                            ]
-                        )
-                        self.conn.commit()
+                        cur.execute(INSERT_TABLE, [
+                            movie['episode_nb'], 
+                            movie['title'], 
+                            movie['director'],
+                            movie['producer'], 
+                            movie['release_date']
+                        ])
+                        conn.commit()
                         ret.append('OK')
                     except psycopg2.DatabaseError as e:
-                        self.conn.rollback()
+                        conn.rollback()
                         ret.append(f'{e}')
-                cur.close()
-                self.conn.close()
         except Exception as e:
             return HttpResponse(f'{e}')
         return HttpResponse('</br>'.join(str(i) for i in ret))

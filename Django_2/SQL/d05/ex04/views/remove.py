@@ -48,8 +48,7 @@ class Remove(View):
             print(f'Error fetching data: {e}')
 
         data = RemoveForm(choices, request.POST)
-        if data.is_valid() == True:
-            print(f"{data.cleaned_data['title']}")
+        if data.is_valid():
             try:
                 with conn.cursor() as cur:
                     cur.execute(f'''

@@ -16,18 +16,17 @@ host = os.getenv('DB_HOST')
 TABLE_NAME = 'ex04_movies'
 
 class Display(View):
-    conn = psycopg2.connect(database=name, password=pwd, port=port, host=host)
-    
     def get(self, request):
+        conn = psycopg2.connect(database=name, password=pwd, port=port, host=host)
         try :
-            with self.conn.cursor() as cur:
-                cur.execute('''
-                    SELECT episode_nb, title, director, producer, release_date FROM {table_name}
-                '''.format(table_name=TABLE_NAME)
+            with conn.cursor() as cur:
+                cur.execute(f'''
+                    SELECT episode_nb, title, director, producer, release_date FROM {TABLE_NAME}
+                '''
                 )
                 rows = cur.fetchall()
                 cur.close()
-                self.conn.close()
+                conn.close()
         except Exception:
-            print('No data available.')
+            return HttpResponse('No data available.')
         return render(request, 'ex04/display.html', {'rows': rows})

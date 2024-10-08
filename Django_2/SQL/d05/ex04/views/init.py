@@ -20,17 +20,14 @@ class Init(View):
     
     def get(self, request):
         try:
-            CREATE_TABLE = '''
-                CREATE TABLE {table_name} (
-                            episode_nb INT PRIMARY KEY,
-                            title VARCHAR(64) UNIQUE NOT NULL,
-                            director VARCHAR(32) NOT NULL,
-                            producer VARCHAR(128) NOT NULL,
-                            release_date DATE NOT NULL
-                );
-            '''.format(table_name=TABLE_NAME)
             with self.conn.cursor() as cur:
-                cur.execute(CREATE_TABLE)
+                cur.execute(f'''CREATE TABLE {TABLE_NAME} (
+                        episode_nb INT PRIMARY KEY,
+                        title VARCHAR(64) UNIQUE NOT NULL,
+                        director VARCHAR(32) NOT NULL,
+                        producer VARCHAR(128) NOT NULL,
+                        release_date DATE NOT NULL);
+                    ''')
             self.conn.commit()
         except Exception as e:
             return HttpResponse(f'{e}')
