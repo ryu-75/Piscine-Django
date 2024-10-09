@@ -80,9 +80,9 @@ else
     exit 1
 fi
 
-# Get the installed version of Django
+# Get the installed version of psycopg2
 installed_version=$(pip show psycopg2-binary | grep Version | awk '{print $2}')
-# Get the latest version of Django from PyPI
+# Get the latest version of psycopg2 from PyPI
 latest_version=$(pip install psycopg2-binary --upgrade | grep "Requirement already satisfied: psycopg2-binary in" | awk '{print $7}' | tr -d '()')
 
 if [ $latest_version = $installed_version ]; then
@@ -106,9 +106,9 @@ else
     exit 1
 fi
 
-# Get the installed version of Django
+# Get the installed version of Markdown
 installed_version=$(pip show markdown | grep Version | awk '{print $2}')
-# Get the latest version of Django from PyPI
+# Get the latest version of Markdown from PyPI
 latest_version=$(pip install markdown --upgrade | grep "Requirement already satisfied: markdown in" | awk '{print $7}' | tr -d '()')
 
 if [ $latest_version = $installed_version ]; then
@@ -132,9 +132,9 @@ else
     exit 1
 fi
 
-# Get the installed version of Django
+# Get the installed version of Dotenv
 installed_version=$(pip show python-dotenv | grep Version | awk '{print $2}')
-# Get the latest version of Django from PyPI
+# Get the latest version of Dotenv from PyPI
 latest_version=$(pip install python-dotenv --upgrade | grep "Requirement already satisfied: python-dotenv in" | awk '{print $7}' | tr -d '()')
 
 if [ $latest_version = $installed_version ]; then
@@ -143,6 +143,31 @@ else
     echo -e "🔄 ${YELLOW}python-dotenv is outdated! Updating...${RESET}"
     pip install --upgrade python-dotenv
     echo -e "🚀 ${YELLOW}python-dotenv updated to $latest_version!${RESET}"
+fi
+echo "================================================================"
+echo "🚀 Installing csvfile..."
+pip install csvfile
+
+test=$(pip show csvfile > /dev/null 2>&1)
+echo $test
+
+if pip show csvfile > /dev/null 2>&1; then
+    echo -e "✅ ${GREEN}csvfile is installed!${RESET}"
+else
+    echo -e "❌ ${RED}csvfile to install psycopg2${RESET}"
+    exit 1
+fi
+# Get the installed version of csvfile
+installed_version=$(pip show csvfile | grep Version | awk '{print $2}')
+# Get the latest version of csvfile from PyPI
+latest_version=$(pip install csvfile --upgrade | grep "Requirement already satisfied: csvfile in" | awk '{print $7}' | tr -d '()')
+
+if [ $latest_version = $installed_version ]; then
+    echo -e "✅ ${GREEN}csvfile is already up to date!${RESET}"
+else
+    echo -e "🔄 ${YELLOW}csvfile is outdated! Updating...${RESET}"
+    pip install --upgrade csvfile
+    echo -e "🚀 ${YELLOW}csvfile updated to $latest_version!${RESET}"
 fi
 echo "================================================================"
 echo "📝 Creating a requirements.txt..."
