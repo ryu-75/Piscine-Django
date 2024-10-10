@@ -43,13 +43,10 @@ class   Init(View):
             );
         '''.format(planet_table=PLANET_TABLE, people_table=PEOPLE_TABLE)
         conn = psycopg2.connect(database=database, port=port, user=user, host=host, password=pwd)
-        with conn.cursor() as curs:
-            try:
+        try:
+            with conn.cursor() as curs:
                 curs.execute(CREATE_TABLE)
-                conn.commit()
-            except Exception as e:
-                return HttpResponse(f'Error creating tables: {e}')
-            finally:
-                curs.close()
-                conn.close()
-            return HttpResponse('OK')
+            conn.commit()
+        except Exception as e:
+            return HttpResponse(f'Error creating tables: {e}')
+        return HttpResponse('OK')

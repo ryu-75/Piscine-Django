@@ -1,0 +1,32 @@
+<!DOCTYPE html>{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars - Planets and caracters</title>
+    <link rel="stylesheet" href="{% static 'styles/ex08.css' %}">
+</head>
+<body>
+    <h1>Star Wars - Planets and caracters</h1>
+    <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <td class="attr">Names</td>
+                    <td class="attr">Planets</td>
+                    <td class="attr">Climate</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                <tr>
+                    <td>{{data.0}}</td>
+                    <td>{{data.1}}</td>
+                    <td>{{data.2}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
