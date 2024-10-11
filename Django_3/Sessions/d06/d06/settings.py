@@ -8,8 +8,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
-"""
 
+https://www.pythontutorial.net/django-tutorial/django-sessions/
+"""
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'd06.urls'
+
+# Age of session in second
+SESSION_COOKIE_AGE = 42
 
 TEMPLATES = [
     {
@@ -124,4 +128,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Added 10 names in USERNAME
-# USERNAME=[]
+USERNAME=['Luffy', 'Jinbe', 'Zorro', 'Chopper', 'Sanji', 'Brook', 'Franky', 'Nami', 'Robin', 'Usopp']

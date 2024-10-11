@@ -1,12 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name='viewport' content='width=device-width initial-scale=1.0'>
         <title>Life Pro Tips</title>
+        <link rel="stylesheet" href="{% static 'ex00/style.css' %}">
     </head>
     <body>
+        {% include 'ex00/nav.html' %}
         <h1>Life Pro Tips</h1>
-        <div>{% block content%}{% endblock content %}</div>
     </body>
 </html>
