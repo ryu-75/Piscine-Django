@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from ..models import Movies
-
 movies = [
     {
         'episode_nb': '1',
@@ -57,17 +56,20 @@ movies = [
     
 class   Populate(View):
     def get(self, request):
+        tab = []
         try:
-            tab = []
             for movie in movies:
-                get_movie = Movies.objects.create(
-                    episode_nb=movie['episode_nb'], 
-                    title=movie['title'], 
-                    producer=movie['producer'], 
-                    director=movie['director'], 
-                    release_date=movie['release_date']
-                )
-                tab.append('OK')
+                try:
+                    Movies.objects.create(
+                        episode_nb=movie['episode_nb'], 
+                        title=movie['title'], 
+                        producer=movie['producer'], 
+                        director=movie['director'], 
+                        release_date=movie['release_date']
+                    )
+                    tab.append('OK')
+                except Movies.DoesNotExist as e:
+                    tab.append(f'Error: {e}')
             return HttpResponse('</br>'.join(str(i) for i in tab))
         except Exception as e:
-            return HttpResponse(f'Data cannot be reach.')
+            return HttpResponse(f'Error: {e}')

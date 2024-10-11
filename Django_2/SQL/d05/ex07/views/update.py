@@ -17,8 +17,8 @@ class   Update(View):
         try:
             movies = Movies.objects.all().values()
             choices = [(movie['title'], movie['title']) for movie in movies]
-        except Movies.DoesNotExist:
-            return HttpResponse("No data available")
+        except Exception as e:
+            return HttpResponse(f"Error: {e}")
         
         form = Form(choices, request.POST)
         if form.is_valid():
@@ -28,6 +28,6 @@ class   Update(View):
             movie = Movies.objects.get(title=title)
             movie.opening_crawl = your_text
             movie.save()
-        except Movies.DoesNotExist:
-            return HttpResponse("No data available")    
+        except Exception as e:
+            return HttpResponse(f"Error: {e}")   
         return redirect(request.path)

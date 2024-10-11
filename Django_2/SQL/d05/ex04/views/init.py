@@ -10,25 +10,27 @@ dotenv.load_dotenv(os.path.join(settings.BASE_DIR, '.env'))
 name = os.getenv('DB_NAME')
 pwd = os.getenv('DB_PWD')
 port = os.getenv('DB_PORT')
-svc = os.getenv('DB_SERVICE')
+user = os.getenv('DB_USER')
 host = os.getenv('DB_HOST')
 
 TABLE_NAME = 'ex04_movies'
-
 class Init(View):
-    conn = psycopg2.connect(database=name, password=pwd, port=port, host=host)
-    
     def get(self, request):
+        conn = psycopg2.connect(database=name, password=pwd, port=port, host=host, user=user)
         try:
-            with self.conn.cursor() as cur:
+            with conn.cursor() as cur:
                 cur.execute(f'''CREATE TABLE {TABLE_NAME} (
                         episode_nb INT PRIMARY KEY,
                         title VARCHAR(64) UNIQUE NOT NULL,
+                        opening_crawl TEXT,
                         director VARCHAR(32) NOT NULL,
                         producer VARCHAR(128) NOT NULL,
                         release_date DATE NOT NULL);
                     ''')
-            self.conn.commit()
+            conn.commit()
         except Exception as e:
             return HttpResponse(f'{e}')
+        finally:
+            cur.close()
+            conn.close()
         return HttpResponse('OK')

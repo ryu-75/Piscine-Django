@@ -17,20 +17,26 @@ class  Display(View):
     table_people = 'ex08_people'
     template = 'ex08/display.html'
     def get(self, request):
-        conn = psycopg2.connect(database=database, port=port, user=user, host=host, password=pwd)
-        SELECT_VALUES = f'''
-            SELECT {self.table_people}.name,
-                    {self.table_people}.homeworld, 
-                    {self.table_planets}.climate
-                    FROM {self.table_planets} 
-                    RIGHT JOIN {self.table_people} 
-                    ON {self.table_people}.homeworld = {self.table_planets}.name
-                    ORDER BY {self.table_people}.name
-        '''
-        with conn.cursor() as curs:
-            try:
-                curs.execute(SELECT_VALUES)
-                datas = curs.fetchall()
+        try:
+            conn = psycopg2.connect(database=database, port=port, user=user, host=host, password=pwd)
+            SELECT_VALUES = f'''
+                SELECT {self.table_people}.name,
+                        {self.table_people}.homeworld, 
+                        {self.table_planets}.climate
+                        FROM {self.table_planets} 
+                        RIGHT JOIN {self.table_people} 
+                        ON {self.table_people}.homeworld = {self.table_planets}.name
+                        ORDER BY {self.table_people}.name
+            '''
+            with conn.cursor() as curs:
+                try:
+                    curs.execute(SELECT_VALUES)
+                    datas = curs.fetchall()
+                except Exception:
+                    return HttpResponse('No data available')
+                finally:
+                    curs.close()
+                    conn.close()
                 return render(request, self.template, {'datas': datas})
-            except Exception as e:
-                return HttpResponse(f'No data available')
+        except Exception as e:
+            return HttpResponse(f'Error: {e}')

@@ -1,19 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.conf import settings
+from django.http import HttpResponse
 import psycopg2, os
-import dotenv 
 from django.views import View
+from dotenv import load_dotenv
 
-dotenv.load_dotenv(os.path.join(settings.BASE_DIR, '.env'))
+load_dotenv(os.path.join(settings.BASE_DIR, '.env'))
 
-name = os.getenv('DB_NAME')
-pwd = os.getenv('DB_PWD')
+database = os.getenv('DB_NAME')
 port = os.getenv('DB_PORT')
 user = os.getenv('DB_USER')
 host = os.getenv('DB_HOST')
+password = os.getenv('DB_PWD')
 
-TABLE_NAME = 'ex04_movies'
 movies = [
     {
         'episode_nb': '1',
@@ -65,40 +64,39 @@ movies = [
         'release_date': '2015-12-11' 
     }
 ]
+TABLE_NAME = 'ex03_movies'
 class Populate(View):
     def get(self, request):
-        conn = psycopg2.connect(database=name, user=user, password=pwd, port=port, host=host)
         try:
+            conn = psycopg2.connect(database=database, port=port, host=host, password=password, user=user)
             ret = []
-            INSERT_TABLE = '''INSERT INTO {table_name} (
-                                episode_nb, 
-                                title, 
-                                director, 
-                                producer, 
-                                release_date
-                            ) VALUES (
-                                %s,
-                                %s,
-                                %s,
-                                %s,
-                                %s);'''.format(table_name=TABLE_NAME)
+            INSERT_DATA = '''
+                INSERT INTO {table_name}(
+                    episode_nb,
+                    title,
+                    director,
+                    producer,
+                    release_date
+                ) VALUES (
+                    %s, %s, %s, %s, %s
+                );
+            '''.format(table_name=TABLE_NAME)
             with conn.cursor() as cur:
                 for movie in movies:
                     try:
-                        cur.execute(INSERT_TABLE, [
-                            movie['episode_nb'], 
-                            movie['title'], 
-                            movie['director'],
-                            movie['producer'], 
-                            movie['release_date']
-                        ])
+                        cur.execute(
+                            INSERT_DATA, [
+                                movie['episode_nb'],
+                                movie['title'],
+                                movie['director'],
+                                movie['producer'],
+                                movie['release_date'],
+                            ])
                         conn.commit()
                         ret.append('OK')
                     except psycopg2.DatabaseError as e:
                         conn.rollback()
                         ret.append(f'{e}')
-                cur.close()
-                conn.close()
+            return HttpResponse('<br/>'.join(str(i) for i in ret))
         except Exception as e:
             return HttpResponse(f'{e}')
-        return HttpResponse('</br>'.join(str(i) for i in ret))

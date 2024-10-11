@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from django.conf import settings
 from django.views import View
 
-
 load_dotenv(os.path.join(settings.BASE_DIR, '.env'))
 
 database = os.getenv('DB_NAME')
@@ -43,11 +42,15 @@ class   Init(View):
                 ON {table_name} FOR EACH ROW EXECUTE PROCEDURE
                 update_changetimestamp_column();
             '''.format(table_name=TABLE_NAME)
-            cur = conn.cursor()
-            with cur as curs:
-                curs.execute(TABLE_MOVIES)
-            conn.commit()
-            conn.close()
-            return HttpResponse('OK')
+            with conn.cursor() as curs:
+                try :
+                    curs.execute(TABLE_MOVIES)
+                except psycopg2.DatabaseError as e:
+                    return HttpResponse(f'Error: {e}')
+                finally:
+                    conn.commit()
+                    curs.close()
+                    conn.close()
+                return HttpResponse('OK')
         except Exception as e:
             return HttpResponse(f'{e}')

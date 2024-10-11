@@ -75,37 +75,43 @@ class   Populate(View):
                 homeworld
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
         '''.format(table_people=TABLE_PEOPLE)
-        conn = psycopg2.connect(database=database, user=user, password=pwd, host=host, port=port)
         ret = []
-        with conn.cursor() as curs:
-            try:
-                ret.append(TABLE_PLANETS)
-                for planet in self.planets: 
-                    curs.execute(INSERT_PLANETS, [
-                        None if planet['name'] == 'NULL' else planet['name'],
-                        None if planet['climate'] == 'NULL' else planet['climate'],
-                        None if planet['diameter'] == 'NULL' else planet['diameter'],
-                        None if planet['orbital_period'] == 'NULL' else planet['orbital_period'],
-                        None if planet['population'] == 'NULL' else planet['population'],
-                        None if planet['rotation_period'] == 'NULL' else planet['rotation_period'],
-                        None if planet['surface_water'] == 'NULL' else planet['surface_water'],
-                        None if planet['terrain'] == 'NULL' else planet['terrain'],
-                    ])
-                    ret.append('OK')
-                ret.append(TABLE_PEOPLE)
-                for people in self.peoples:
-                    curs.execute(INSERT_PEOPLE, [
-                        None if people['name'] == 'NULL' else people['name'],
-                        None if people['birth_year'] == 'NULL' else people['birth_year'],
-                        None if people['gender'] == 'NULL' else people['gender'],
-                        None if people['eye_color'] == 'NULL' else people['eye_color'],
-                        None if people['hair_color'] == 'NULL' else people['hair_color'],
-                        None if people['height'] == 'NULL' else people['height'],
-                        None if people['mass'] == 'NULL' else people['mass'],
-                        None if people['homeworld'] == 'NULL' else people['homeworld'],
-                    ])
-                    conn.commit()
-                    ret.append('OK')
-            except Exception as e:
-                return HttpResponse(f'Error: {e}')
-        return HttpResponse('<br/>'.join(str(i) for i in ret))
+        try:
+            conn = psycopg2.connect(database=database, user=user, password=pwd, host=host, port=port)
+            with conn.cursor() as curs:
+                try:
+                    ret.append(TABLE_PLANETS)
+                    for planet in self.planets: 
+                        curs.execute(INSERT_PLANETS, [
+                            None if planet['name'] == 'NULL' else planet['name'],
+                            None if planet['climate'] == 'NULL' else planet['climate'],
+                            None if planet['diameter'] == 'NULL' else planet['diameter'],
+                            None if planet['orbital_period'] == 'NULL' else planet['orbital_period'],
+                            None if planet['population'] == 'NULL' else planet['population'],
+                            None if planet['rotation_period'] == 'NULL' else planet['rotation_period'],
+                            None if planet['surface_water'] == 'NULL' else planet['surface_water'],
+                            None if planet['terrain'] == 'NULL' else planet['terrain'],
+                        ])
+                        ret.append('OK')
+                    ret.append(TABLE_PEOPLE)
+                    for people in self.peoples:
+                        curs.execute(INSERT_PEOPLE, [
+                            None if people['name'] == 'NULL' else people['name'],
+                            None if people['birth_year'] == 'NULL' else people['birth_year'],
+                            None if people['gender'] == 'NULL' else people['gender'],
+                            None if people['eye_color'] == 'NULL' else people['eye_color'],
+                            None if people['hair_color'] == 'NULL' else people['hair_color'],
+                            None if people['height'] == 'NULL' else people['height'],
+                            None if people['mass'] == 'NULL' else people['mass'],
+                            None if people['homeworld'] == 'NULL' else people['homeworld'],
+                        ])
+                        conn.commit()
+                        ret.append('OK')
+                except psycopg2.DatabaseError as e:
+                    ret.append(f'Error: {e}')
+                finally:
+                    curs.close()
+                    conn.close()
+            return HttpResponse('<br/>'.join(str(i) for i in ret))
+        except Exception as e:
+            return HttpResponse(f'Error: {e}')

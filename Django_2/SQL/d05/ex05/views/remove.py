@@ -20,7 +20,6 @@ class Remove(View):
             data = RemoveForm(choices, request.POST)
             if data.is_valid():
                 Movies.objects.filter(title=data.cleaned_data['title']).delete()
-                print(f'Data was correctly delete')
-        except Movies.DoesNotExist:
-            return HttpResponse('No data available')
+        except Movies.DoesNotExist as e:
+            return HttpResponse(f'Error: {e}')
         return redirect(request.path)

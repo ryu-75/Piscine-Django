@@ -18,7 +18,7 @@ PEOPLE_TABLE = 'ex08_people'
 class   Init(View):
     def get(self, request):
         CREATE_TABLE= '''
-            CREATE TABLE IF NOT EXISTS {planet_table} (
+            CREATE TABLE {planet_table} (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(64) UNIQUE NOT NULL,
                 climate VARCHAR,
@@ -29,7 +29,7 @@ class   Init(View):
                 surface_water REAL,
                 terrain VARCHAR(128)
             );
-            CREATE TABLE IF NOT EXISTS {people_table} (
+            CREATE TABLE {people_table} (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(64) UNIQUE NOT NULL,
                 birth_year VARCHAR(32),
@@ -45,8 +45,14 @@ class   Init(View):
         conn = psycopg2.connect(database=database, port=port, user=user, host=host, password=pwd)
         try:
             with conn.cursor() as curs:
-                curs.execute(CREATE_TABLE)
-            conn.commit()
+                try:
+                    curs.execute(CREATE_TABLE)
+                except psycopg2.DatabaseError as e:
+                    return HttpResponse(f'Error: {e}')
+                finally:
+                    conn.commit()
+                    curs.close()
+                    conn.close()
+                return HttpResponse('OK')
         except Exception as e:
-            return HttpResponse(f'Error creating tables: {e}')
-        return HttpResponse('OK')
+            return HttpResponse(f'Error: {e}')
