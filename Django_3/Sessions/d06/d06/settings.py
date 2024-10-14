@@ -41,20 +41,23 @@ INSTALLED_APPS = [
     'ex00.apps.Ex00Config'
 ]
 
+# The ordre are important cuz a middleware depend to an other
+# Order : https://docs.djangoproject.com/fr/5.1/ref/middleware/#middleware-ordering
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Staging an unauthentified user in session. Should execute after SessionsMiddleware
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ex00.middleware.middleware.MiddlewareAnonymeSessions'
 ]
 
 ROOT_URLCONF = 'd06.urls'
 
 # Age of session in second
-SESSION_COOKIE_AGE = 42
+SESSION_COOKIE_AGE = 2
 
 TEMPLATES = [
     {
@@ -71,6 +74,14 @@ TEMPLATES = [
         },
     },
 ]
+
+# https://docs.djangoproject.com/fr/5.1/ref/settings/#std-setting-CACHES
+CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "unique-snowflake",
+        }
+}
 
 WSGI_APPLICATION = 'd06.wsgi.application'
 

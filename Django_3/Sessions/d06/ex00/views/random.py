@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpRequest
-from random import choice
+import random 
 from django.conf import settings
+from django.core.cache import cache
+from datetime import datetime
 
 class   Random(View):
-    template = 'ex00/base.html'
+    template = 'ex00/init.html'
     def get(self, request):
-        names = request.session.get(settings.USERNAME)
-        return render(request, self.template, {'names':choice(names)})
+        timer = datetime.now().second
+        context = {'name': request.session.get('name')}
+        return render(request, self.template, context=context)
