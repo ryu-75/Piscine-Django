@@ -12,10 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 https://www.pythontutorial.net/django-tutorial/django-sessions/
 """
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variable
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -30,7 +34,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Boostrap - https://www.w3schools.com/django/django_add_bootstrap5.php
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ex00.apps.Ex00Config'
+    'ex00.apps.Ex00Config',
+    'bootstrap5'
 ]
 
 # The ordre are important cuz a middleware depend to an other
@@ -55,9 +60,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'd06.urls'
-
-# Age of session in second
-SESSION_COOKIE_AGE = 2
 
 TEMPLATES = [
     {
@@ -91,8 +93,12 @@ WSGI_APPLICATION = 'd06.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'PASSWORD': os.environ['DB_PWD'],
+        'USER': os.environ['DB_USER'],
+        'NAME': os.environ['DB_NAME'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
     }
 }
 
@@ -115,6 +121,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Password hashers
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

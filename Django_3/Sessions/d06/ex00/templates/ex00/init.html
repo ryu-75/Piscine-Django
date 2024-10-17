@@ -5,10 +5,13 @@
         <meta charset="utf-8">
         <meta name='viewport' content='width=device-width initial-scale=1.0'>
         <title>Life Pro Tips</title>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
         <link rel="stylesheet" href="{% static 'ex00/style.css' %}">
     </head>
     <body>
         {% include 'ex00/nav.html' %}
-        <h1>Life Pro Tips</h1>
+        {% block content %}{% endblock content %}
     </body>
 </html>

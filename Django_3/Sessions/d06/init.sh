@@ -102,7 +102,7 @@ echo $test
 if pip show markdown > /dev/null 2>&1; then
     echo -e "✅ ${GREEN}markdown is installed!${RESET}"
 else
-    echo -e "❌ ${RED}markdown to install psycopg2${RESET}"
+    echo -e "❌ ${RED}Failed to install markdown${RESET}"
     exit 1
 fi
 
@@ -128,7 +128,7 @@ echo $test
 if pip show python-dotenv > /dev/null 2>&1; then
     echo -e "✅ ${GREEN}python-dotenv is installed!${RESET}"
 else
-    echo -e "❌ ${RED}python-dotenv to install psycopg2${RESET}"
+    echo -e "❌ ${RED}Failed to install python-dotenv${RESET}"
     exit 1
 fi
 
@@ -154,7 +154,7 @@ echo $test
 if pip show csvfile > /dev/null 2>&1; then
     echo -e "✅ ${GREEN}csvfile is installed!${RESET}"
 else
-    echo -e "❌ ${RED}csvfile to install psycopg2${RESET}"
+    echo -e "❌ ${RED}Failed to install csvfile${RESET}"
     exit 1
 fi
 # Get the installed version of csvfile
@@ -168,6 +168,31 @@ else
     echo -e "🔄 ${YELLOW}csvfile is outdated! Updating...${RESET}"
     pip install --upgrade csvfile
     echo -e "🚀 ${YELLOW}csvfile updated to $latest_version!${RESET}"
+fi
+echo "================================================================"
+echo "🚀 Installing django-bootstrap-v5..."
+pip install django-bootstrap-v5
+
+test=$(pip show django-bootstrap-v5 > /dev/null 2>&1)
+echo $test
+
+if pip show django-bootstrap-v5 > /dev/null 2>&1; then
+    echo -e "✅ ${GREEN}django-bootstrap-v5 is installed!${RESET}"
+else
+    echo -e "❌ ${RED}Failed to install django-bootstrap-v5${RESET}"
+    exit 1
+fi
+# Get the installed version of django-bootstrap-v5
+installed_version=$(pip show django-bootstrap-v5 | grep Version | awk '{print $2}')
+# Get the latest version of django-bootstrap-v5 from PyPI
+latest_version=$(pip install django-bootstrap-v5 --upgrade | grep "Requirement already satisfied: django-bootstrap-v5 in" | awk '{print $7}' | tr -d '()')
+
+if [ $latest_version = $installed_version ]; then
+    echo -e "✅ ${GREEN}django-bootstrap-v5 is already up to date!${RESET}"
+else
+    echo -e "🔄 ${YELLOW}django-bootstrap-v5 is outdated! Updating...${RESET}"
+    pip install --upgrade django-bootstrap-v5
+    echo -e "🚀 ${YELLOW}django-bootstrap-v5 updated to $latest_version!${RESET}"
 fi
 echo "================================================================"
 echo "📝 Creating a requirements.txt..."

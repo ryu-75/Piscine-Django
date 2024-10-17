@@ -1,4 +1,13 @@
 {% load cache %}
-<nav class="nav-content">
-    <p>{{name}}</p>
+{% load static %}
+<link rel="stylesheet" href="{% static 'ex00/nav.css' %}">
+<nav class="nav bg-info rounded-bottom">
+    <div class="mx-auto align-items-center">
+        <div class="d-flex justify-content-evenly m-2">
+            <a class="mx-5" href={% url '' %}>Life Pro Tips</a>
+            <a class="mx-5" href={% url 'subscription' %}>Subscription</a>
+            <a class="mx-5" href={% url 'connexion' %}>Connexion</a>
+        </div>
+    </div>
+    <p id="username" class="position-absolute end-0 m-2">Hello {{anonymous}} !</p>
 </nav>
