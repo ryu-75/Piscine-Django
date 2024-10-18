@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from ..models import Users
 from django.db import IntegrityError
+from django.contrib.auth.hashers import make_password
 
 class SubscriptionForm(forms.ModelForm):
     username = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={"required": True, "class": 'form-control', 'placeholder': 'Username'}))
@@ -31,11 +32,12 @@ class SubscriptionForm(forms.ModelForm):
     
     # recording data
     def record_data(self):
+        cleaned_data = self.cleaned_data
         try:
-            cleaned_data = self.cleaned_data
-            Users.objects.create(
+            user = Users.objects.create(
                 username=cleaned_data.get('username'),
-                password=cleaned_data.get('password')
+                password=make_password(cleaned_data.get('password'))
             )
+            return user
         except IntegrityError as e:
-            print(f'Error: {e}')
+            return None

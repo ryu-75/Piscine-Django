@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.conf import settings
 from django.core.cache import cache
+from ex00.forms.connexionForm import ConnexionForm
 from datetime import datetime
 
 class   Init(View):

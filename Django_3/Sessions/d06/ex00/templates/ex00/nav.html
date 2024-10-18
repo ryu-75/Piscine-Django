@@ -5,9 +5,19 @@
     <div class="mx-auto align-items-center">
         <div class="d-flex justify-content-evenly m-2">
             <a class="mx-5" href={% url '' %}>Life Pro Tips</a>
-            <a class="mx-5" href={% url 'subscription' %}>Subscription</a>
-            <a class="mx-5" href={% url 'connexion' %}>Connexion</a>
+            {% if not request.user.is_authenticated %}
+                <a class="mx-5" href={% url 'subscription' %}>Subscription</a>
+                <a class="mx-5" href={% url 'login' %}>Sign in</a>
+            {% else %}
+                <a class="mx-5" href={% url 'logout' %}>Sign out</a>
+            {% endif %}
         </div>
     </div>
-    <p id="username" class="position-absolute end-0 m-2">Hello {{anonymous}} !</p>
+    <p id="username" class="position-absolute end-0 m-2">
+        {% if request.user.is_authenticated %}
+            Hello {{ request.user.username }}
+        {% else %}
+            Hello {{anonymous}} !
+        {% endif %}
+    </p>
 </nav>

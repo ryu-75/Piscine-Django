@@ -5,10 +5,22 @@
 <h2 class="text-center mt-4">{{ page_title }}</h2>
 <div class="d-flex justify-content-center">
     <div id="form-content">
-        <form method="post">
+        {% if next %}
+        <form action="/login/?next={{next}}" method="post" >
+        {% endif %}
+        <form action="{% url 'login' %}" method="{{ get_method }}">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value={{ page_title }}>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ errors|join:", " }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <input type="submit" value="{{ page_title }}">
         </form>
     </div>
 </div>

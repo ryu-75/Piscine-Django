@@ -32,6 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Redirect if user is already logged
+LOGIN_URL = '/'
 
 # Application definition
 # Boostrap - https://www.w3schools.com/django/django_add_bootstrap5.php
@@ -56,7 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # Staging an unauthentified user in session. Should execute after SessionsMiddleware
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'ex00.middleware.middleware.MiddlewareAnonymeSessions'
+    'ex00.middleware.middleware.MiddlewareAnonymeSessions',
+    'ex00.middleware.auth_redirect_middleware.AuthRedirectMiddleware'
 ]
 
 ROOT_URLCONF = 'd06.urls'
@@ -121,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'ex00.Users'
 
 # Password hashers
 
