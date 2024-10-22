@@ -3,9 +3,8 @@ from django.core.exceptions import ValidationError
 from ..models import Users
 from django.db import IntegrityError
 from django.contrib.auth.hashers import make_password
-from django.contrib import messages
 
-class SubscriptionForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm):
     username = forms.CharField(label='Username', max_length=100, widget=forms.TextInput(attrs={"required": True, "class": 'form-control', 'placeholder': 'Username'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={"required": True, "class": 'form-control', 'placeholder': 'Password'}))
     repeat_password = forms.CharField(label='Repeat password', widget=forms.PasswordInput(attrs={"required": True, "class": 'form-control', 'placeholder': 'Repeat password'}))
@@ -17,7 +16,7 @@ class SubscriptionForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
     
-    # Get clean data
+    # Get cleaned data
     def clean(self):
         cleaned_data = super().clean()
         pwd = cleaned_data.get('password')
@@ -26,7 +25,7 @@ class SubscriptionForm(forms.ModelForm):
         
         
         if Users.objects.filter(username=username).exists():
-            raise ValidationError("Username already exist")
+            return
         if pwd and rpt_pwd and pwd != rpt_pwd:
             raise ValidationError("Password are different")
 

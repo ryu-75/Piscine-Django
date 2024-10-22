@@ -1,2 +1,2 @@
-from .subscriptionForm import *
-from .connexionForm import *
+from .register_form import *
+from .login_form import *

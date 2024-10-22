@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-evenly m-2">
             <a class="mx-5" href={% url 'home' %}>Life Pro Tips</a>
             {% if not request.user.is_authenticated %}
-                <a class="mx-5" href={% url 'subscription' %}>Subscription</a>
+                <a class="mx-5" href={% url 'register' %}>Subscription</a>
                 <a class="mx-5" href={% url 'login' %}>Sign in</a>
             {% else %}
                 <a class="mx-5" href={% url 'logout' %}>Sign out</a>

@@ -1,6 +1,6 @@
 from typing import Any
 from django.views.generic.edit import FormView
-from ex.forms.connexionForm import ConnexionForm
+from ex.forms.login_form import ConnexionForm
 from django.http import HttpRequest, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -13,6 +13,7 @@ class Login(FormView):
     
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         if request.user.is_authenticated:
+            messages.error(self.request, "You are already logged in !")
             return HttpResponseRedirect(reverse('home'))
         return super().get(request, *args, **kwargs)
     
@@ -32,6 +33,7 @@ class Login(FormView):
         if user is None:
             messages.error(self.request, "Username and/or password are required")
             return self.form_invalid(form)
+        messages.info(self.request, "You're connected now !")
         login(self.request, user)
         return HttpResponseRedirect(self.get_success_url())
     
