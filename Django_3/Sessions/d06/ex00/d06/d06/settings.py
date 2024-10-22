@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ex00.apps.Ex00Config',
+    'ex.apps.ExConfig',
     'bootstrap5'
 ]
 
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',  # Staging an unauthentified user in session. Should execute after SessionsMiddleware
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'ex00.middleware.middleware.MiddlewareAnonymeSessions',
+    'ex.middleware.middleware.MiddlewareAnonymeSessions',
 ]
 
 ROOT_URLCONF = 'd06.urls'

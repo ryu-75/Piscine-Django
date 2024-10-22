@@ -11,7 +11,7 @@ class   MiddlewareAnonymeSessions(MiddlewareMixin):
             return
         current_time = time.time()
         init_time = request.session.setdefault('anonymous_timestamp', current_time)
-        if time.time() - init_time > SESSION_TIME_EXPIRE:
+        if (time.time() - init_time) > SESSION_TIME_EXPIRE:
             request.session.flush()
         if 'anonymous' not in request.session:
             request.session['anonymous'] = random.choice(settings.USERNAME)

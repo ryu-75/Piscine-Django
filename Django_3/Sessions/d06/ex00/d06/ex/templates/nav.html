@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="{% static 'styles/nav.css' %}">
 <nav class="nav bg-info rounded-bottom">
     <div class="mx-auto align-items-center my-3">
-        <a class="mx-5" href={% url '' %}>Life Pro Tips</a>
+        <a class="mx-5" href="{% url 'home' %}">Life Pro Tips</a>
     </div>
     <p id="username" class="position-absolute end-0 m-3">
-        Hello {{anonymous}} !
+        Hello {{ anonymous }} !
     </p>
 </nav>
