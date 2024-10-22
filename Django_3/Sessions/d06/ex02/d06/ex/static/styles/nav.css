@@ -1,0 +1,18 @@
+nav {
+    background: linear-gradient(200deg, #0e65a0, #7983db);
+}
+
+#username {
+    font-weight: 700;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+}
+
+a:hover {
+    color: rgb(255, 232, 29);
+}
