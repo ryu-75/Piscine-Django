@@ -15,16 +15,16 @@ class   Init(FormView):
         if self.request.user.is_authenticated:
             return [self.template_name]
         else:
-            return ['init.html']
+            return ['index.html']
     
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['form'] = self.form_class()
-            context['page_title'] = "Share"
+            context['page_title'] = "Life Pro Tips"
             context['get_method'] =  "post"
             context['author'] = self.request.user.username
-            context['tips'] = Tip.objects.all()
+            context['tips'] = Tip.objects.all().order_by('-date')
         else:
             context['anonymous'] = self.request.session.get('anonymous', 'default')
         return context

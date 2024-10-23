@@ -3,7 +3,7 @@ from ex.models import Tip
 from django.db import IntegrityError
 
 class TipForm(forms.ModelForm):
-    content = forms.CharField(label='Share your tip !', widget=(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Writing your tip here !', 'required': True})))
+    content = forms.CharField(label='', widget=(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Writing your tip here !', 'required': True})))
     
     class Meta:
         model = Tip
