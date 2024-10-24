@@ -9,7 +9,7 @@ from django.urls import reverse
 class Login(FormView):
     template_name = 'form.html'
     form_class = ConnexionForm
-    success_url = '/'
+    success_url = 'home'
     
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         if request.user.is_authenticated:
@@ -22,6 +22,7 @@ class Login(FormView):
         anonymous_session = self.request.session.get('anonymous', 'default')
         context['page_title'] = 'Log in'
         context['get_method'] = 'post'
+        context['link'] = 'login'
         context['anonymous'] = anonymous_session
         return context
     

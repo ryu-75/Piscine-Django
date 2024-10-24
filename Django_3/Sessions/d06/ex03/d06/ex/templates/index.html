@@ -32,33 +32,52 @@
             {% block content %}{% endblock content %}
             {% if user.is_authenticated %}
                 <h2 class="text-center mt-4 text-white">Tips shared !</h2>
+                <div class="d-flex justify-content-center p-4 rounded w-auto">
+                    <form class="w-50" action="{% url 'tip' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-light rounded" value="Share">
+                    </form>
+                </div>
                 {% for tip in tips %}
-                <div class="d-flex justify-content-center m-4">
+                <div class="d-flex justify-content-center m-4 position-relative">
                     <div class="card w-50">
                         <div class="card-body">
-                            {% if author %}
-                                <h3 class="text-center card-title font-weight-bold">💡 Tip !</h3>
-                                <div class='line'></div>
-                                <p class="fs-5 card-text pt-2">{{ tip.content }}</p>
-                                <p class="fw-light text-end card-text pt-2">Share by <b>{{ tip.author.username }}</b></p>
-                            {% else %}
-                                <p>It's a bit quiet here...</p>
-                            {% endif %}
+                            <h3 class="text-center card-title font-weight-bold">💡 Tip !</h3>
+                            <div class='line'></div>
+                            <p class="fs-5 card-text pt-2">{{ tip.content }}</p>
+                            <p class="fw-light text-end card-text pt-2">Share by <b>{{ tip.author.username }}</b></p>
                             <div class='line'></div>
                             <div class="d-flex justify-content-around mt-4">
                                 <div class="d-flex flex-column align-items-center">
-                                    <p><b>{% url 'vote' tip.id 'upvoted' %}</b></p>
-                                    <button type="button" class="btn btn-success">
-                                        <img src="{% static 'images/arrow_up.svg' %}" alt="upvoted">
-                                    </button>
+                                    <p>👍 {{ tip.upvoted.count }}</p>
+                                    {% if tip.author.username != user.username %}
+                                    <form action="{% url 'upvoted_tip' tip.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success">
+                                            <img src="{% static 'images/arrow_up.svg' %}" alt="upvoted">
+                                        </button>
+                                    {% endif %}
+                                    </form>
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
-                                    <p><b>{% url 'vote' tip.id 'downvoted' %}</b></p>
-                                    <button type="button" class="btn btn-danger">
-                                        <img src="{% static 'images/arrow_down.svg' %}" alt="downvoted">
-                                    </button>
+                                    <p>👎 {{ tip.downvoted.count }}</p>
+                                    {% if tip.author.username != user.username %}
+                                    <form action="{% url 'downvoted_tip' tip.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">
+                                            <img src="{% static 'images/arrow_down.svg' %}" alt="downvoted">
+                                        </button>
+                                    {% endif %}
+                                    </form>
                                 </div>
                             </div>
+                            {% if tip.author.username == user.username %}
+                                <form action="{% url 'delete_tip' tip.id %}" method="post" class="m-5">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning position-absolute end-0 bottom-0 m-2">Delete</button>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

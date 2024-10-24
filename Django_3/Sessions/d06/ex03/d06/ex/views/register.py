@@ -11,7 +11,7 @@ from django.urls import reverse
 class Register(FormView):
     template_name = 'form.html'
     form_class = RegisterForm
-    success_url = '/login'
+    success_url = 'home'
     
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         if request.user.is_authenticated:
@@ -25,13 +25,14 @@ class Register(FormView):
         context['anonymous'] = anonymous_session
         context['page_title'] = 'Register'
         context['get_method'] = 'post'
+        context['link'] = 'register'
         return context
     
     def form_valid(self, form):
         user = form.record_data()
         login(self.request, user)
         messages.info(self.request, "Welcome ! You are now logged in.")
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect(self.get_success_url())
     
     def form_invalid(self, form):
         messages.error(self.request, "An issue occured during the registration")
