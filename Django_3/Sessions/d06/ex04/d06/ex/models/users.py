@@ -1,9 +1,12 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, Permission
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
+    def assign_auth_to_user(users):
+        permission = Permission.objects.get(codename='auth_delete_tip')
+        users.user_permissions.add(permission)
     """
     Custom user model manager where username is the unique identifiers
     for authentication.
@@ -17,6 +20,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(username=username)
         user.set_password(password)
         user.save(using=self._db)
+        self.assign_auth_to_user(user)
         return user
     
     def create_superuser(self, username, password):
@@ -28,15 +32,12 @@ class CustomUserManager(BaseUserManager):
             password=password
         )
         user.is_admin = True
-        user.is_superuser = True
         user.save(using=self._db)
-        
         return user
 
 class Users(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=200, unique=True)
     is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     
     USERNAME_FIELD = "username"
