@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/'
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ex.apps.ExConfig',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -87,6 +89,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'ex.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
