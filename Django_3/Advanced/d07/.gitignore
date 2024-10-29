@@ -1,0 +1,11 @@
+# Python
+__pycache__
+migrations/__pycache__
+
+# Django specific
+*.sqlite3
+db.sqlite3
+
+# Virtual environments
+django_venv
+.env
