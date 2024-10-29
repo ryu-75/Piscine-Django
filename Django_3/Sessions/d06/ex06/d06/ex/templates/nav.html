@@ -1,5 +1,5 @@
-{% load cache %}
 {% load static %}
+{% load cache %}
 <link rel="stylesheet" href="{% static 'styles/nav.css' %}">
 <nav class="nav">
     <div class="mx-auto align-items-center">
@@ -13,11 +13,13 @@
             {% endif %}
         </div>
     </div>
-    <p id="username" class="position-absolute end-0 m-2">
-        {% if request.user.is_authenticated %}
-            Hello {{ request.user.username }}
-        {% else %}
-            Hello {{ anonymous }} !
-        {% endif %}
-    </p>
+    <div class="d-flex flex-column">
+        <p id="username" class="position-absolute end-0 m-2">
+            {% if request.user.is_authenticated %}
+                Hello {{ request.user.username }} ( {{ request.user.reputation }} )
+            {% else %}
+                Hello {{ anonymous }} !
+            {% endif %}
+        </p>
+    </div>
 </nav>

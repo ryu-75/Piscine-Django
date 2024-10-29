@@ -1,8 +1,6 @@
 {% extends "index.html" %}
 {% load bootstrap5 %}
-{% load static %}
 {% block content%}
-<link rel="stylesheet" href="{% static 'styles/forms.css' %}">
 <h2 class="text-center pt-4 text-white">{{ page_title }}</h2>
 <div class="d-flex justify-content-center p-4 rounded w-auto">
     <form class="w-50" action="{% url link %}" method="{{ get_method }}">

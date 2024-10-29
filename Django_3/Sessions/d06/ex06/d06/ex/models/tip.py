@@ -26,7 +26,15 @@ class Tip(models.Model):
             ('auth_delete_tip', 'can delete tip'),
             ('can_add_downvote', 'can add downvote')
         ]
-        
+               
+    def increment_reputation(self, points, status):
+        if status == 'upvoted':
+            self.author.reputation += points
+        elif status == 'downvoted':
+            self.author.reputation -= points
+        elif status == 'delete':
+            self.author.reputation -= self.author.reputation
+        self.author.save()     
         
     def get_upvoted(self, user):
         try:
@@ -37,6 +45,7 @@ class Tip(models.Model):
         
         if not self.upvoted.filter(author=user).exists():
             upvoted = UpvotedModel(author=user)
+            self.increment_reputation(5, 'upvoted')
             upvoted.save()
             self.upvoted.add(upvoted)
                             
@@ -49,5 +58,8 @@ class Tip(models.Model):
         
         if not self.downvoted.filter(author=user).exists():
             downvoted = DownvoteModel(author=user)
+            self.increment_reputation(2, 'downvoted')
             downvoted.save()
             self.downvoted.add(downvoted)
+
+    

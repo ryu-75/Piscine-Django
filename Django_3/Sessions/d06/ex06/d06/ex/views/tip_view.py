@@ -15,8 +15,12 @@ class DeleteTipView(View):
     """Delete a tip when the delete button is clicked in view"""
     def post(self, request, id):
         tip = get_object_or_404(Tip, pk=id)
-        if request.user.has_perm('ex.auth_delete_tip') or request.user.username == tip.author.username or request.is_admin:
+        if request.user.reputation >= 30 or request.user.username == tip.author.username or request.user.is_admin:
             messages.info(request, "Your tip is correctly !")
+            if tip.author.reputation > 0:
+                print(f'user: {tip.author.username}')
+                print(f'reputation: {tip.author.reputation}')
+                tip.increment_reputation(0, 'delete')
             tip.delete()
         else:
             messages.error(request, "Your tip cannot be delete...")
@@ -30,14 +34,13 @@ class UpvotedTipView(View):
     def post(self, request, id):
         tip = get_object_or_404(Tip, pk=id)
         
-        if tip.author.username != request.user.username or request.user.reputation >= 30:
+        if request.user.is_authenticated and tip.author.username != request.user.username:
             existing_upvoted = tip.upvoted.filter(author=request.user).first()
             if existing_upvoted:
                 tip.upvoted.remove(existing_upvoted)
                 messages.info(request, "Downvote was delete!")
             else:
                 tip.get_upvoted(request.user)
-                tip.author.increment_reputation(5, 'upvoted')
                 messages.info(request, "Upvote confirmed !")
         else:
             messages.error(request, "You can't juged yourself !")
@@ -51,14 +54,13 @@ class DownvotedTipView(View):
     def post(self, request, id):
         tip = get_object_or_404(Tip, pk=id)
         
-        if request.user.is_authenticated or tip.author.username != request.user.username:
+        if request.user.is_authenticated and tip.author.username != request.user.username or request.user.reputation >= 15:
             existing_downvote = tip.downvoted.filter(author=request.user).first()
             if existing_downvote:
                 tip.downvoted.remove(existing_downvote)
                 messages.info(request, "Downvote was delete!")
             else:
                 tip.get_downvoted(request.user)
-                tip.author.increment_reputation(2, 'downvoted')
                 messages.info(request, "Downvote confirmed !")
         else:
             messages.error(request, "You can't juged yourself !")

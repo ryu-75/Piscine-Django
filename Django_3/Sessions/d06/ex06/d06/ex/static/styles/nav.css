@@ -1,8 +1,13 @@
-#nav {
+.nav {
     background: linear-gradient(200deg, #0e65a0, #7983db);
 }
 
 #username {
+    font-weight: 700;
+    color: white;
+}
+
+#reputation {
     font-weight: 700;
     color: white;
 }

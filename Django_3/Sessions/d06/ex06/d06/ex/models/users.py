@@ -68,11 +68,3 @@ class Users(AbstractBaseUser, PermissionsMixin):
         
     def __str__(self):
         return self.username
-    
-    def increment_reputation(self, points, status):
-        if status == 'upvoted':
-            self.reputation += points
-        elif status == 'downvoted':
-            self.reputation -= points
-        self.save()
-    
