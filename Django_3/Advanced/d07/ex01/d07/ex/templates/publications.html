@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block style %}<link rel="stylesheet" href="{% static 'styles/tables.css' %}"> {% endblock style%}
+{% block content %}
+<div class="article-content">
+    <h2>Articles</h2>
+    {% if publications is None %}
+    <div class="article-error">
+        <p>No data found...</p>
+    </div>
+    {% else %}
+    <table class="article-table-content">
+        <thead>
+            <th>Title</th>
+            <th>Synopsis</th>
+            <th>Created</th>
+        </thead>
+        {% for publication in publications %}
+        {% if publication.author.username == request.user.username %}
+        <tbody>
+            <td>{{ publication.title }}</td>
+            <td>{{ publication.synopsis }}</td>
+            <td>{{ publication.created }}</td>
+        </tbody>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock content %}

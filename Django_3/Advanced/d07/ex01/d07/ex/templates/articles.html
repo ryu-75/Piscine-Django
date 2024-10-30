@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block style %}<link rel="stylesheet" href="{% static 'styles/tables.css' %}"> {% endblock style%}
+{% block content %}
+<div class="article-content">
+    <h2>Articles</h2>
+    {% if articles is None %}
+    <div class="article-error">
+        <p>No data found...</p>
+    </div>
+    {% else %}
+    <table class="article-table-content">
+        <thead>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Synopsis</th>
+            <th>Author</th>
+            <th>Created</th>
+        </thead>
+        {% for article in articles %}
+        <tbody>
+            <td style="text-align: center;">{{ article.id }}</td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.synopsis }}</td>
+            <td style="text-align: center;">{{ article.author.username }}</td>
+            <td>{{ article.created }}</td>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock content %}
