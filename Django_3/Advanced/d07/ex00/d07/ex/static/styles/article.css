@@ -1,0 +1,38 @@
+.article-content {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 2rem;
+}
+
+.article-table-content {
+    display: table-column;
+    justify-content: center;
+    position: absolute;
+    margin-top: 4rem;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 15px;
+}
+
+th {
+    border-bottom: 2px solid;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 50px;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 2px solid;
+}
+
+.article-error {
+    position: relative;
+    position: absolute;
+    bottom: 0;
+    height: 50vh;
+    font-size: 2rem;
+}

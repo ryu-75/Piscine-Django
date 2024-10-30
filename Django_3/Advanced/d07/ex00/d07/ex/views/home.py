@@ -1,8 +1,12 @@
-from django.shortcuts import render
-from django.views import View
+from django.shortcuts import redirect
+from django.views.generic.list import ListView
+from ex.models import Articles
 
-class Home(View):
-    template_name = 'index.html'
+class HomeView(ListView):
+    template_name = 'articles.html'
+    model = Articles
+    context_object_name = 'article'
+    
     def get(self, request):
-        return render(request, self.template_name)
+        return redirect(self.context_object_name)
 
