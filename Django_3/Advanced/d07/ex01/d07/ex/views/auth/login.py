@@ -27,7 +27,6 @@ class Login(FormView):
     def form_valid(self, form: LoginForm):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
-        
         try:
             user = authenticate(self.request, username=username, password=password)
             messages.info(self.request, "You are now logged")

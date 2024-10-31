@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block style %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
+<link rel="stylesheet" href="{% static 'styles/favourites.css' %}"> 
+{% endblock style%}
+{% bootstrap_css %}
+{% block content %}
+<h3 class="mt-4 text-light text-center">Favourites</h3>
+<div class="d-flex justify-content-center">
+    <div class="favourites-content">
+        {% for favourite in favourites %}
+            <div class="favourite-item">
+                <p class="fw-bold mx-3 my-3"><a style="color: black" href="{% url 'details' favourite.id %}">{{ favourite }}</a></p>
+                <form method="post" action="{% url 'favourites' %}" >
+                    {% csrf_token %}
+                    <input type="hidden" name="article_id" value="{{ favourite.article_id }}">
+                    <button type='submit' name="action" value="remove" class="rounded-circle bg-warning border-0 mx-3 my-2">
+                        <span class="material-symbols-outlined m-1 text-light">
+                            close
+                        </span>
+                    </button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

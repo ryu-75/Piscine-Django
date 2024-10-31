@@ -6,13 +6,18 @@
         <div class="d-flex justify-content-evenly m-2">
             <a class="mx-5" href={% url 'home' %}>Articles</a>
             {% if not request.user.is_authenticated %}
-                <a class="mx-5" href={% url 'login' %}>Sign in</a>
+                <a class="mx-5" href={% url 'login' %}>Sign in</a>  
+            {% else %}
+                <a class="mx-5" href={% url 'publication' %}>Publication</a>
+                <a class="mx-5" href={% url 'details' %}>Details</a>
+                <a class="mx-5" href={% url 'favourites' %}>Favourites</a>
+                <a class="mx-5" href={% url 'logout' %}>Log out</a>  
             {% endif %}
         </div>
     </div>
-    <p id="username" class="position-absolute end-0 m-2">
-        {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
+        <p id="username" class="position-absolute end-0 m-2">
             {{ request.user.username }}
-        {% endif %}
-    </p>
+        </p>
+    {% endif %}
 </nav>

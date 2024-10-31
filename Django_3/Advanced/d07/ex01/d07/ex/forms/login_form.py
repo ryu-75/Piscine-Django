@@ -29,7 +29,6 @@ class LoginForm(forms.Form):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-        
         user = authenticate(username=username, password=password)
         
         if not user:
