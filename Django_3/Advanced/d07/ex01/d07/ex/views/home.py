@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 class HomeView(ListView):
     template_name = 'articles.html'
     model = Articles
-    context_object_name = 'article'
+    context_object_name = 'articles'
     
     def get(self, request):
         return redirect(self.context_object_name)

@@ -28,7 +28,7 @@
                 <td>{{ article.created }}</td>
                 {% if article.author_id != request.user.id  and request.user.is_authenticated  %}
                     <td>
-                        <form method="post" action="{% url 'article' %}">
+                        <form method="post" action="{% url 'articles' %}">
                             {% csrf_token %}
                             <input type="hidden" name="article_id" value="{{ article.id }}">
                             {% if article.id in favorites %}

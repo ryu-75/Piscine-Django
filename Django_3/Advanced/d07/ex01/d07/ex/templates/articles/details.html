@@ -6,42 +6,20 @@
 {% endblock style %}
 {% block content%}
 <h2>Details</h2>
-{% if authored_articles %}
-    <div class="mb-4">
-        {% for detail in authored_articles %}
-            {% if detail.author.username == request.user.username %}
-                <div class="details-content">
-                    <article class="detail-article-content">
-                        <h3><a style="color: black; font-weight: 500;" href="{% url 'details' detail.id %}">{{ detail.title }}</a></h3>
-                        <div style="width: 100%; background: linear-gradient(-30deg, #0e65a0, #7983db); height: 5px; margin-bottom: 1rem;"></div>
-                        <p class="synopsis">{{ detail.synopsis }}</p>
-                        <p class="content">{{ detail.content }}</p>
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <p>{{ detail.created }}</p>
-                            <p><b>{{ detail.author.username }}</b></p>
-                        </div>
-                    </article>
-                </div>
-            {% endif %}
-        {% endfor %}    
-    </div>
-{% endif %}
-{% if liked_articles %}
-    <div class="mb-4">
-        {% for details in liked_articles %}
-            <div class="details-content">
-                <article class="detail-article-content">
-                    <h3><a style="color: black; font-weight: 500;" href="{% url 'details' details.id %}">{{ details.title }}</a></h3>
-                    <div style="width: 100%; background: linear-gradient(-30deg, #0e65a0, #7983db); height: 5px; margin-bottom: 1rem;"></div>
-                    <p class="synopsis">{{ details.synopsis }}</p>
-                    <p class="content">{{ details.content }}</p>
-                    <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <p>{{ details.created }}</p>
-                        <p><b>{{ details.author.username }}</b></p>
-                    </div>
-                </article>
+{% if details %}
+<div class="mb-4">
+    <div class="details-content">
+        <article class="detail-article-content">
+            <h3><a style="color: black; font-weight: 500;" href="">{{ details.article.title }}</a></h3>
+            <div style="width: 100%; background: linear-gradient(-30deg, #0e65a0, #7983db); height: 5px; margin-bottom: 1rem;"></div>
+            <p class="synopsis">{{ details.article.synopsis }}</p>
+            <p class="content">{{ details.article.content }}</p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p>{{ details.article.created }}</p>
+                <p><b>{{ details.article.author.username }}</b></p>
             </div>
-        {% endfor %}
+        </article>
     </div>
+</div>
 {% endif %}
 {% endblock content %}

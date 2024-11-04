@@ -13,10 +13,10 @@ class FavouritesView(ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         if self.request.user.is_authenticated:
-            queryset = UserFavoriteArticle.objects.filter(user=user).values_list('article_id', flat=True)
-            context['favorites'] = list(queryset)
+            queryset = UserFavoriteArticle.objects.filter(user=user)
+            context['favourites'] = list(queryset)
         else:
-            context['favorites'] = []
+            context['favourites'] = []
         return context
     
     

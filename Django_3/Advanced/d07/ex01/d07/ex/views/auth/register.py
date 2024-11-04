@@ -7,7 +7,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse
 
-class Register(FormView):
+class RegisterView(FormView):
     template_name = 'form.html'
     form_class = RegisterForm
     success_url = "/"

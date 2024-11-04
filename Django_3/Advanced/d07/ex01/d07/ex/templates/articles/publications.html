@@ -8,7 +8,7 @@
 {% endblock style%}
 {% block content %}
 <div class="article-content">
-    <h2>Publication</h2>
+    <h2>Publications</h2>
     {% if articles is None %}
         <div class="article-error">
             <p>No data found...</p>
@@ -24,7 +24,7 @@
             {% for article in articles %}
                 {% if article.author.username == request.user.username %}
                     <tbody>
-                        <td>{{ article.title }}</td>
+                        <td><a href="{% url 'article' article.id %}">{{ article.title }}</a></td>
                         <td>{{ article.synopsis }}</td>
                         <td>{{ article.created }}</td>
                         <td>

@@ -35,7 +35,7 @@ class ArticlesView(ListView):
                 messages.success(request, "Valid action") if success else messages.warning(request, "Invalid action.")
             else:
                 messages.warning(request, "Invalid article ID.")
-            return HttpResponseRedirect(reverse('article'))
+            return HttpResponseRedirect(reverse(self.context_object_name))
         else:
             messages.warning(request, "You need to be logged in to add favorites.")
         

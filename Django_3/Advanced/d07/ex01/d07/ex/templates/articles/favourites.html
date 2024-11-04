@@ -12,7 +12,7 @@
     <div class="favourites-content">
         {% for favourite in favourites %}
             <div class="favourite-item">
-                <p class="fw-bold mx-3 my-3"><a style="color: black" href="{% url 'details' favourite.id %}">{{ favourite }}</a></p>
+                <p class="fw-bold mx-3 my-3"><a style="color: black" href="{% url 'article' favourite.id %}">{{ favourite.article.title }}</a></p>
                 <form method="post" action="{% url 'favourites' %}" >
                     {% csrf_token %}
                     <input type="hidden" name="article_id" value="{{ favourite.article_id }}">
