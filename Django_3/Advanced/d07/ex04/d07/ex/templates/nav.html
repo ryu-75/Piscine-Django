@@ -1,33 +1,34 @@
 {% load cache %}
 {% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
 {% comment %}Handle in the navbar the user login {% endcomment %}
-{% load custom_filter %}
-{% login_context_form user=request.user.username id=request.user.id %}
-<link rel="stylesheet" href="{% static 'styles/nav.css' %}">
-<nav class="nav bg-black m-4 rounded">
-    <div class="mx-auto align-items-center">
-        <div class="d-flex justify-content-evenly m-2">
-            <a class="mx-5" href={% url 'articles' %}>Articles</a>
-            {% if not request.user.is_authenticated %}
-                <a class="mx-5" href={% url 'register' %}>Register</a>  
-                <div class="d-flex justify-content-center p-4 rounded w-auto">
-                    <form class="w-50" method="post">
-                        {% csrf_token %}
-                        {{ login_context_form }}
-                        <input type="submit" class="btn btn-light rounded" value="{{ btn_name }}">
-                    </form>
-                </div>
-            {% else %}
-                <a class="mx-5" href={% url 'publication' %}>Publications</a>
-                <a class="mx-5" href={% url 'favourites' %}>Favourites</a>
-                <a class="mx-5" href={% url 'publish' %}>Publish</a>
-                <a class="mx-5" href={% url 'logout' %}>Log out</a>  
-            {% endif %}
+{% block style %}<link rel="stylesheet" href="{% static 'styles/nav.css' %}">{% endblock style %}
+<nav class="navbar bg-black mx-4 rounded">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="d-flex justify-content-evenly m-2 navbar-left">
+                {% if not user.is_authenticated %}
+                    <a class="mx-5" href={% url 'articles' %}>Articles</a>
+                    <a class="mx-5" href={% url 'register' %}>Register</a>  
+                {% else %}
+                    <a class="mx-5" href={% url 'publication' %}>Publications</a>
+                    <a class="mx-5" href={% url 'favourites' %}>Favourites</a>
+                    <a class="mx-5" href={% url 'publish' %}>Publish</a>
+                    <a class="mx-5" href={% url 'logout' %}>Log out</a>  
+                {% endif %}
+            </div>
         </div>
+        {% if user.is_authenticated %}
+            <p id="username" class="position-absolute end-0 m-2">
+                Logged as {{ request.user.username }}
+            </p>
+        {% else %}
+            <form class="navbar-right d-flex pt-3 px-3 justify-content-center navbar-form" action={% url 'home' %} method="post">
+                {% csrf_token %}
+                {% bootstrap_form login_form %}
+                <input type="submit" class="btn btn-light rounded h-50" value="Log in">
+            </form>
+        {% endif %}
     </div>
-    {% if request.user.is_authenticated %}
-        <p id="username" class="position-absolute end-0 m-2">
-            Logged as {{ request.user.username }}
-        </p>
-    {% endif %}
 </nav>

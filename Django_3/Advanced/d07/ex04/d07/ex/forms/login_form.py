@@ -4,14 +4,16 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='username', max_length=200, widget=forms.TextInput(attrs={
+    username = forms.CharField(label='', max_length=200, widget=forms.TextInput(attrs={
         'required': True, 
-        'class': 'form-control', 
+        'class': 'form-control',
+        'id': 'username',
         'placeholder': 'username'
     }))
-    password = forms.CharField(label='password', max_length=200, widget=forms.PasswordInput(attrs={
+    password = forms.CharField(label='', max_length=200, widget=forms.PasswordInput(attrs={
         'required': True, 
         'class': 'form-control', 
+        'id': 'password',
         'placeholder': '*********'
     }))
     

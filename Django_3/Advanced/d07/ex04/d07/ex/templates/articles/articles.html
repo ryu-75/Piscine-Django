@@ -1,13 +1,12 @@
 {% extends "index.html" %}
 {% load static %}
 {% load custom_filter %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
 {% block style %}
-    <link rel="stylesheet" href="{% static 'styles/tables.css' %}"> 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close,favorite" />
+<link rel="stylesheet" href="{% static 'styles/tables.css' %}"> 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close,favorite" />
 {% endblock style%}
 {% block content %}
+{% include 'nav.html' with form=form btn_name=btn_name link=link %}
 <div class="article-content">
     <h2>Articles</h2>
     {% if articles is not None %}
