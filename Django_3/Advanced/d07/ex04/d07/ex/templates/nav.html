@@ -1,0 +1,33 @@
+{% load cache %}
+{% load static %}
+{% comment %}Handle in the navbar the user login {% endcomment %}
+{% load custom_filter %}
+{% login_context_form user=request.user.username id=request.user.id %}
+<link rel="stylesheet" href="{% static 'styles/nav.css' %}">
+<nav class="nav bg-black m-4 rounded">
+    <div class="mx-auto align-items-center">
+        <div class="d-flex justify-content-evenly m-2">
+            <a class="mx-5" href={% url 'articles' %}>Articles</a>
+            {% if not request.user.is_authenticated %}
+                <a class="mx-5" href={% url 'register' %}>Register</a>  
+                <div class="d-flex justify-content-center p-4 rounded w-auto">
+                    <form class="w-50" method="post">
+                        {% csrf_token %}
+                        {{ login_context_form }}
+                        <input type="submit" class="btn btn-light rounded" value="{{ btn_name }}">
+                    </form>
+                </div>
+            {% else %}
+                <a class="mx-5" href={% url 'publication' %}>Publications</a>
+                <a class="mx-5" href={% url 'favourites' %}>Favourites</a>
+                <a class="mx-5" href={% url 'publish' %}>Publish</a>
+                <a class="mx-5" href={% url 'logout' %}>Log out</a>  
+            {% endif %}
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        <p id="username" class="position-absolute end-0 m-2">
+            Logged as {{ request.user.username }}
+        </p>
+    {% endif %}
+</nav>

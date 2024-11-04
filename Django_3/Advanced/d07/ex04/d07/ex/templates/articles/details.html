@@ -1,0 +1,25 @@
+{% extends "index.html" %} 
+{% load static %}
+{% load bootstrap5 %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/details.css' %}">
+{% endblock style %}
+{% block content%}
+<h2>Details</h2>
+{% if details %}
+<div class="mb-4">
+    <div class="details-content">
+        <article class="detail-article-content">
+            <h3><a style="color: black; font-weight: 500;" href="">{{ details.article.title }}</a></h3>
+            <div style="width: 100%; background: linear-gradient(-30deg, #0e65a0, #7983db); height: 5px; margin-bottom: 1rem;"></div>
+            <p class="synopsis">{{ details.article.synopsis }}</p>
+            <p class="content">{{ details.article.content }}</p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <p>{{ details.article.created|date:"d M Y" }}</p>
+                <p><b>{{ details.article.author.username }}</b></p>
+            </div>
+        </article>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
