@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 from django.http import HttpRequest, HttpResponse
 from django.views.generic.edit import FormView
 from ex.forms.register_form import RegisterForm
@@ -12,20 +12,20 @@ class RegisterView(FormView):
     form_class = RegisterForm
     success_url = "/"
     
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def get(self, request: HttpRequest, *args: str, **kwargs: Dict[str, Any]) -> HttpResponse:
         if request.user.is_authenticated:
             messages.error(self.request, "You are already register !")
             return HttpResponseRedirect(reverse('home'))
         return super().get(request, *args, **kwargs)
     
-    def get_context_data(self, **kwargs: str) -> dict[str, Any]:
+    def get_context_data(self, **kwargs: Dict[str, Any]) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['link'] = 'register'
         context['btn_name'] = 'Sign up'
         context['page_title'] = 'Register'
         return context
     
-    def form_valid(self, form: RegisterForm):
+    def form_valid(self, form: RegisterForm) -> HttpResponse:
         user = form.record_data()
         login(self.request, user)
         messages.info(self.request, "You're correctly registered !")

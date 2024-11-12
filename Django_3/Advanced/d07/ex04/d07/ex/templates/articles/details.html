@@ -5,13 +5,15 @@
 <link rel="stylesheet" href="{% static 'styles/details.css' %}">
 {% endblock style %}
 {% block content%}
-<h2>Details</h2>
+{% include 'nav.html' with form=form btn_name=btn_name link=link %}
+<h2 class="mt-4">Details</h2>
 {% if details %}
-<div class="mb-4">
+<div class="mb-4 d-flex justify-content-center">
     <div class="details-content">
+        <div class="details-header">
+            <h3>{{ details.article.title }}</h3>
+        </div>
         <article class="detail-article-content">
-            <h3><a style="color: black; font-weight: 500;" href="">{{ details.article.title }}</a></h3>
-            <div style="width: 100%; background: linear-gradient(-30deg, #0e65a0, #7983db); height: 5px; margin-bottom: 1rem;"></div>
             <p class="synopsis">{{ details.article.synopsis }}</p>
             <p class="content">{{ details.article.content }}</p>
             <div style="display: flex; align-items: center; justify-content: space-between;">

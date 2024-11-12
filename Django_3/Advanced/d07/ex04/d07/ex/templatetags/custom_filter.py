@@ -1,15 +1,27 @@
-from django.utils import timezone
 from django import template
-from ex.models import User
-from ex.forms import LoginForm
-from django.http import HttpResponse
+from datetime import datetime
+from django.utils import timezone
 register = template.Library()
 
 @register.filter
 def article_release_from(value):
-    """
-    Return the number of day from the release date to currently date
-    """
     if not value:
-        print("You should to added a valid date to get the correct number of day.")
-    return (timezone.now() - value).days 
+        return ""
+    
+    now = timezone.now()
+    delta = now - value
+    
+    days = delta.days
+    months = days // 30
+    weeks = (days % 30) // 7
+    days = days % 7
+    
+    duration_parts = []
+    if months > 0:
+        duration_parts.append(f"{months} month{'s' if months > 1 else ''}")
+    if weeks > 0:
+        duration_parts.append(f"{weeks} week{'s' if weeks > 1 else ''}")
+    if days > 0:
+        duration_parts.append(f"{days} day{'s' if days > 1 else ''}")
+        
+    return ", ".join(duration_parts) if duration_parts else "today"

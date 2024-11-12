@@ -12,27 +12,29 @@
     {% if articles is not None %}
         <table class="article-table-content">
             <thead>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Synopsis</th>
-                <th>Author</th>
-                <th>Created</th>
-                <th></th>
-                <th></th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Synopsis</th>
+                <th class="text-center">Writer</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">When</th>
+                <th class="text-center"></th>
+                <th class="text-center"></th>
             </thead>
             {% for article in articles %}
             <tbody>
-                <td style="text-align: center;">{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.synopsis|truncatechars:"20" }}</td>
-                <td style="text-align: center;">{{ article.author.username }}</td>
-                <td>{{ article.created|date:"d M Y" }}</td>
+                <td>{{ article.author.username }}</td>
+                <td>{{ article.created }}</td>
                 <td>
-                    {% if article.created|article_release_from == 0 %}
+                    {% if article.created|article_release_from == 'today' %}
                         today
                     {% else %}
-                        {{ article.created|article_release_from }} day(s)
+                        {{ article.created|article_release_from }}
                     {% endif %}
+                </td>
+                <td>
+                    <a class="text-black" href="{% url 'article' article.id %}"><button class="btn btn-light" type="button" >Read</button></a>
                 </td>
                 {% if article.author_id != request.user.id  and request.user.is_authenticated  %}
                     <td>

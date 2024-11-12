@@ -7,6 +7,7 @@
 {% endblock style%}
 {% bootstrap_css %}
 {% block content %}
+{% include 'nav.html' with form=form btn_name=btn_name link=link %}
 <h3 class="mt-4 text-light text-center">Favourites</h3>
 <div class="d-flex justify-content-center">
     <div class="favourites-content">
