@@ -1,0 +1,42 @@
+.article-content,
+.publication-content {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-top: 2rem;
+}
+
+.publication-table-content,
+.article-table-content {
+    display: table-column;
+    justify-content: center;
+    position: absolute;
+    margin-top: 4rem;
+    border-collapse: collapse;
+}
+
+th {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+td {
+    padding: 1rem;
+}
+
+th {
+    padding-bottom: 1rem;
+}
+
+thead,
+tbody {
+    border-bottom: 2px solid;
+}
+
+.article-error,
+.publication-error {
+    position: relative;
+    position: absolute;
+    bottom: 0;
+    height: 50vh;
+}
