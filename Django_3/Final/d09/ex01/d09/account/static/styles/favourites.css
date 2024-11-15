@@ -1,0 +1,14 @@
+.favourites-content {
+    margin-top: 1rem;
+    border-radius: 15px;
+    background-color: rgb(230, 230, 230);
+    width: 50vw;
+}
+
+.favourite-item {
+    background-color: rgba(194, 194, 194, 0.4);
+    border-radius: 25px;
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+}

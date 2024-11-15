@@ -1,0 +1,27 @@
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <meta name='viewport' content='width=device-width initial-scale=1.0'>
+        <title>eChat</title>
+        {% block style %}{% endblock style %}
+        {% bootstrap_css %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+            * {
+                font-family: 'Montserrat';  
+            }
+            body {
+                min-height: 100vh;
+                background: linear-gradient(-30deg, #0e65a0, #7983db);  
+            }
+        </style>
+    </head>
+    <body>
+        {% block content %}{% endblock content %}
+    </body>
+    {% block script %}{% endblock script %}
+    {% bootstrap_javascript %}
+</html>
