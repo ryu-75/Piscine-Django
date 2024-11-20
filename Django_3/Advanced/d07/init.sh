@@ -195,9 +195,33 @@ else
     echo -e "🚀 ${YELLOW}django-bootstrap-v5 updated to $latest_version!${RESET}"
 fi
 echo "================================================================"
+echo "🚀 Installing django-jquery..."
+pip install django-jquery
+
+test=$(pip show django-jquery > /dev/null 2>&1)
+echo $test
+
+if pip show django-jquery > /dev/null 2>&1; then
+    echo -e "✅ ${GREEN}django-jquery is installed!${RESET}"
+else
+    echo -e "❌ ${RED}Failed to install django-jquery${RESET}"
+    exit 1
+fi
+# Get the installed version of django-jquery
+installed_version=$(pip show django-jquery | grep Version | awk '{print $2}')
+# Get the latest version of django-jquery from PyPI
+latest_version=$(pip install django-jquery --upgrade | grep "Requirement already satisfied: django-jquery in" | awk '{print $7}' | tr -d '()')
+
+if [ $latest_version = $installed_version ]; then
+    echo -e "✅ ${GREEN}django-jquery is already up to date!${RESET}"
+else
+    echo -e "🔄 ${YELLOW}django-jquery is outdated! Updating...${RESET}"
+    pip install --upgrade django-jquery
+    echo -e "🚀 ${YELLOW}django-jquery updated to $latest_version!${RESET}"
+fi
+echo "================================================================"
 echo "📝 Creating a requirements.txt..."
 pip freeze > requirements.txt
 echo -e "✅ ${GREEN}requirements.txt is created!${RESET}"
 echo "================================================================"
-
 echo "🎉 All tasks completed successfully! 🎉"

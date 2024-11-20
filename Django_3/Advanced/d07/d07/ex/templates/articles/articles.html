@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% load static %}
+{% load bootstrap5 %}
 {% load custom_filter %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'styles/tables.css' %}"> 
@@ -82,4 +83,24 @@
         </div>
     {% endif %}
 </div>
+{% if messages %}
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card" id='messageCard' style="width: 18rem;">
+            <div class="card-body">
+                {% for message in messages %}
+                    <p class="card-text">{{ message }}</p>
+                {% endfor %}
+                <button type='button' class="btn btn-primary" id="close">Close</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('close').addEventListener('click', function(e) {
+            var card = document.getElementById('messageCard')
+            card.style.display = 'none'
+        })
+    </script>
+{% endif %}
 {% endblock content %}
+  
+

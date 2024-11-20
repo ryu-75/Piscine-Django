@@ -27,7 +27,7 @@
                     <form class="navbar-form d-flex flex-row text-black" action={% url 'login' %} method="post">
                         {% csrf_token %}
                         {% bootstrap_form login_form %}
-                        <input type="submit" class="btn btn-light rounded h-75" value="Log in">
+                        <input type="submit" class="btn btn-light rounded h-75" value="Log in" id="myInput" data-toggle="modal" data-target="#myModal">
                     </form>
                 {% endif %}
                 </div>

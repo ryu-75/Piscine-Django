@@ -21,3 +21,9 @@ msgstr "Mot de passe"
 
 msgid "Confirm password"
 msgstr "Confirmez le mot de passe"
+
+msgid "You're connected now!"
+msgstr "Vous êtes maintenant connecté!"
+
+msgid "User unfound ! Your information may are not valid"
+msgstr "Utilisateur introuvable ! Vos informations doivent être incorrect"
