@@ -1,0 +1,51 @@
+{% load static %}
+{% load bootstrap5 %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang='{{ LANGUAGE_CODE }}'>
+    <head>
+        <meta charset="utf-8">
+        <meta name='viewport' content='width=device-width initial-scale=1.0'>
+        <title>eChat</title>
+        {% block style %}{% endblock style %}
+        {% bootstrap_css %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+            * {
+                font-family: 'Montserrat';  
+            }
+            body {
+                min-height: 100vh;
+                background: linear-gradient(-30deg, #0e65a0, #7983db);  
+            }
+            .language-selector {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1000;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Sélecteur de langue -->
+        <div class="language-selector">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <select name="language" onchange="this.form.submit()" class="form-select form-select-sm">
+                    {% get_current_language as CURRENT_LANG %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% for code, name in AVAILABLE_LANGUAGES %}
+                        <option value="{{ code }}" {% if code == CURRENT_LANG %}selected{% endif %}>
+                            {{ name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        
+        {% block content %}{% endblock content %}
+        {% block script %}{% endblock script %}
+    </body>
+    {% bootstrap_javascript %}
+</html>

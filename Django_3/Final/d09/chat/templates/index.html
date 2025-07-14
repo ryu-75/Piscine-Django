@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'styles/chat.css' %}">
+{% endblock style %}
+
+{% block content %}
+{% include 'head.html' %}
+{% include 'nav.html' %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center text-white w-100">{% trans "Welcome to eChat" %}</h1>
+        </div>
+    </div>
+    <div class="row g-0 mt-4" style="height: 65vh;">
+        <aside id="rooms-container" class="col-md-2">
+            {% include 'rooms.html' %}
+        </aside>
+        <div id="chat-container" class="col-md-8 d-flex align-items-center justify-content-center px-3">
+            <div class="alert alert-info text-center">
+                <h5>{% trans "Welcome to the chat" %}</h5>
+                <p>{% trans "Select a room to start chatting." %}</p>
+            </div>
+        </div>
+        <aside id="users-container" class="col-md-2">
+            {% include 'users.html' %}
+        </aside>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+const TRANSLATIONS = {
+    'sendButton': '{% trans "Send" %}',
+    'messagePlaceholder': '{% trans "Type your message..." %}',
+    'connectionClosed': '{% trans "Chat connection closed" %}',
+    'roomDeleted': '{% trans "This room has been deleted" %}',
+    'redirecting': '{% trans "You will be redirected to the main page..." %}',
+    'backToHome': '{% trans "Back to home" %}',
+    'notMember': '{% trans "You are no longer a member of this room or the room no longer exists." %}'
+};
+
+window.loadChatInterface = function(roomId, roomName) {
+    $('#chat-container').html(`
+        <div class="card h-100 w-100 d-flex flex-column">
+            <div class="card-header">
+                <h5 class="card-title text-center fw-bold mb-0">${roomName}</h5>
+            </div>
+            <div class="card-body d-flex flex-column p-0 flex-grow-1">
+                <div class="position-relative flex-grow-1 d-flex flex-column">
+                    <div id="messages-container" class="overflow-auto p-3 flex-grow-1">  
+                        <div class="text-center text-muted" id="welcome-message"></div>
+                    </div>
+                    <div id="new-message-indicator" class="position-absolute bottom-0 start-50 translate-middle-x mb-2 d-none"></div>
+                </div>
+                <div class="border-top p-2 mt-auto" style="background-color: white;">
+                    <div class="d-flex gap-2">
+                        <input type="text" class="form-control" id="message-input" placeholder="${TRANSLATIONS.messagePlaceholder}" maxlength="500">
+                        <button type="button" class="btn btn-primary" id="send-message-btn">${TRANSLATIONS.sendButton}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+    
+    initializeChatSocket(roomId);
+};
+
+function initializeChatSocket(roomId) {
+    const currentUserId = {{ request.user.id }};
+    const messagesContainer = document.getElementById('messages-container');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-message-btn');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const newMessageIndicator = document.getElementById('new-message-indicator');
+    
+    if (window.currentChatSocket) {
+        window.currentChatSocket.close();
+    }
+    
+    const chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${roomId}/`);
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        
+        if (data.type === 'message_history') {
+            if (data.messages.length > 0) {
+                welcomeMessage.style.display = 'none';
+                data.messages.forEach((message, index) => {
+                    displayMessage(message, index === data.messages.length - 1);
+                });
+                scrollToBottom();
+            }
+        } else if (data.type === 'message') {
+            welcomeMessage.style.display = 'none';
+            displayMessage(data.message, true);
+        } else if (data.type === 'notification') {
+            welcomeMessage.style.display = 'none';
+            displayNotification(data.message);
+        } else if (data.type === 'room_deleted') {
+            displayNotification(data.message, 'danger');
+            setTimeout(() => {
+                $('#chat-container').html(`
+                    <div class="alert alert-warning text-center">
+                        <h5>${TRANSLATIONS.roomDeleted}</h5>
+                        <p>${TRANSLATIONS.redirecting}</p>
+                    </div>
+                `);
+            }, 2000);
+            setTimeout(() => {
+                window.location.href = '/chat/';
+            }, 4000);
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        if (e.code !== 1000) {
+            messagesContainer.innerHTML = `
+                <div class="alert alert-warning text-center">
+                    <h5>${TRANSLATIONS.connectionClosed}</h5>
+                    <p>${TRANSLATIONS.notMember}</p>
+                    <button class="btn btn-primary" onclick="window.location.href='/chat/'">${TRANSLATIONS.backToHome}</button>
+                </div>
+            `;
+        }
+    };
+
+    function displayMessage(message, shouldAutoScroll = true) {
+        const wasNearBottom = isNearBottom();
+        const isCurrentUser = message.user === currentUserId;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message-container ${isCurrentUser ? 'sent' : 'received'}`;
+        
+        const avatarHtml = message.user_image 
+            ? `<img src="${message.user_image}" alt="${message.username}" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover; flex-shrink: 0; margin: 0 8px;">`
+            : `<div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; flex-shrink: 0; margin: 0 8px;">
+                 <span class="text-white fw-bold" style="font-size: 12px;">${message.username.charAt(0).toUpperCase()}</span>
+               </div>`;
+        
+        const messageTime = new Date(message.created_at).toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        if (isCurrentUser) {
+            messageDiv.innerHTML = `
+                <div class="message-bubble rounded-3 p-3">
+                    <div class="fw-bold mb-1" style="font-size: 11px; opacity: 0.9;">${message.username}</div>
+                    <div class="message-content" style="font-size: 14px; line-height: 1.4;">${message.content}</div>
+                    <div class="text-end mt-2" style="font-size: 10px; opacity: 0.7;">${messageTime}</div>
+                </div>
+                ${avatarHtml}
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                ${avatarHtml}
+                <div class="message-bubble rounded-3 p-3">
+                    <div class="fw-bold mb-1" style="font-size: 11px; opacity: 0.8;">${message.username}</div>
+                    <div class="message-content" style="font-size: 14px; line-height: 1.4;">${message.content}</div>
+                    <div class="text-start mt-2" style="font-size: 10px; opacity: 0.7;">${messageTime}</div>
+                </div>
+            `;
+        }
+        
+        messagesContainer.appendChild(messageDiv);
+        
+        if (shouldAutoScroll && (wasNearBottom || isCurrentUser)) {
+            scrollToBottom();
+        } else if (!wasNearBottom && !isCurrentUser) {
+            newMessageIndicator.classList.remove('d-none');
+        }
+    }
+    
+    function isNearBottom() {
+        return messagesContainer.scrollTop + messagesContainer.clientHeight >= messagesContainer.scrollHeight - 50;
+    }
+    
+    function displayNotification(message, type = 'secondary') {
+        const notificationDiv = document.createElement('div');
+        notificationDiv.className = 'text-center mb-3';
+        
+        const badgeClass = type === 'danger' ? 'bg-danger' : 'bg-secondary';
+        const iconClass = type === 'danger' ? 'fas fa-exclamation-triangle' : 'fas fa-info-circle';
+        
+        notificationDiv.innerHTML = `
+            <div class="badge ${badgeClass} p-2 rounded-pill" style="font-size: 12px;">
+                <i class="${iconClass} me-1"></i>
+                ${message}
+            </div>
+        `;
+        
+        messagesContainer.appendChild(notificationDiv);
+        scrollToBottom();
+    }
+
+    function scrollToBottom() {
+        setTimeout(() => {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            newMessageIndicator.classList.add('d-none');
+        }, 100);
+    }
+
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message) {
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInput.value = '';
+        }
+    }
+
+    sendButton.onclick = sendMessage;
+    messageInput.onkeypress = function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    };
+    
+    messagesContainer.addEventListener('scroll', function() {
+        if (isNearBottom()) {
+            newMessageIndicator.classList.add('d-none');
+        }
+    });
+
+    window.currentChatSocket = chatSocket;
+}
+
+$(document).ready(function() {
+    const currentUrl = window.location.pathname;
+    const roomMatch = currentUrl.match(/\/chat\/room\/(\d+)\//);
+    
+    if (roomMatch) {
+        const roomId = roomMatch[1];
+        const roomName = $(`.room-btn[data-room-id="${roomId}"]`).text() || `Room ${roomId}`;
+        
+        loadChatInterface(roomId, roomName);
+    }
+});
+</script>
+{% endblock script %}

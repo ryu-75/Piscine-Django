@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-14 13:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: account/templates/nav.html:12
+msgid "Register"
+msgstr "S'inscrire"
+
+#: account/templates/nav.html:18
+msgid "Logged as"
+msgstr "Connecté en tant que"
+
+#: account/templates/nav.html:20
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: account/templates/nav.html:24
+msgid "Log in"
+msgstr "Connexion"
+
+#: chat/consumers.py:40 chat/views.py:170
+#, python-format
+msgid "%(username)s has left the chat"
+msgstr "%(username)s a quitté le chat"
+
+#: chat/consumers.py:74 chat/consumers.py:89 chat/views.py:215
+#, python-format
+msgid "Room '%(room_name)s' has been deleted by %(username)s"
+msgstr "La conversation '%(room_name)s' a été supprimée par %(username)s"
+
+#: chat/consumers.py:103
+msgid "You are not authorized to delete this room"
+msgstr "Vous n\\'êtes pas autorisé à supprimer cette conversation"
+
+#: chat/templates/index.html:15
+msgid "Welcome to eChat"
+msgstr "Bienvenue sur eChat"
+
+#: chat/templates/index.html:24
+msgid "Welcome to the chat"
+msgstr "Bienvenue dans le chat"
+
+#: chat/templates/index.html:25
+msgid "Select a room to start chatting."
+msgstr "Sélectionnez une room pour commencer à chatter."
+
+#: chat/templates/index.html:38
+msgid "Send"
+msgstr "Envoyer"
+
+#: chat/templates/index.html:39
+msgid "Type your message..."
+msgstr "Tapez votre message..."
+
+#: chat/templates/index.html:40
+msgid "Chat connection closed"
+msgstr "Connexion au chat fermée"
+
+#: chat/templates/index.html:41
+msgid "This room has been deleted"
+msgstr "Cette room a été supprimée"
+
+#: chat/templates/index.html:42
+msgid "You will be redirected to the main page..."
+msgstr "Vous allez être redirigé vers la page principale..."
+
+#: chat/templates/index.html:43
+msgid "Back to home"
+msgstr "Retour au menu principal"
+
+#: chat/templates/index.html:44
+msgid "You are no longer a member of this room or the room no longer exists."
+msgstr "Vous n\\'êtes plus membre de cette room ou la room n\\'existe plus."
+
+#: chat/templates/rooms.html:5
+msgid "Rooms"
+msgstr "Salons"
+
+#: chat/templates/rooms.html:21
+msgid "Create Room"
+msgstr "Créer un salon"
+
+#: chat/templates/rooms.html:27
+msgid "Join a room..."
+msgstr "Rejoindre un salon..."
+
+#: chat/templates/rooms.html:47 chat/templates/rooms.html:48
+#: chat/templates/rooms.html:108
+msgid "Leave"
+msgstr "Quitter"
+
+#: chat/templates/rooms.html:53 chat/templates/rooms.html:54
+#: chat/templates/rooms.html:105
+msgid "Delete"
+msgstr "Supprimer"
+
+#: chat/templates/rooms.html:62 chat/templates/rooms.html:135
+msgid "No rooms joined"
+msgstr "Aucun salon rejoint"
+
+#: chat/templates/rooms.html:73 chat/templates/rooms.html:155
+msgid "Are you sure you want to leave this room?"
+msgstr "Êtes-vous sûr de vouloir quitter cette conversation?"
+
+#: chat/templates/rooms.html:74 chat/templates/rooms.html:183
+msgid "Are you sure you want to delete this room? This action is irreversible."
+msgstr ""
+"Êtes-vous sûr de vouloir supprimer cette conversation? Cette action est "
+"irréversible."
+
+#: chat/templates/rooms.html:75 chat/templates/rooms.html:220
+msgid "Room name to create?"
+msgstr "Nom de la conversation?"
+
+#: chat/templates/users.html:5
+msgid "Connected Users"
+msgstr "Utilisateurs connectés"
+
+#: chat/templates/users.html:21 chat/templates/users.html:48
+msgid "Online"
+msgstr "En ligne"
+
+#: chat/templates/users.html:28
+msgid "No users connected"
+msgstr "Aucun utilisateur connecté"
+
+#: chat/views.py:130
+#, python-format
+msgid "%(username)s has joined the chat"
+msgstr "%(username)s a rejoint le chat"

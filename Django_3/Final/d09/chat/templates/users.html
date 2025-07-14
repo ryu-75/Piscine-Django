@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+<div class="card overflow-auto" style="height: 65vh;">
+    <div class="card-header">
+        <h5 class="card-title text-center fw-bold mb-0">{% trans "Connected Users" %}</h5>
+    </div>
+    <div class="card-body p-2 overflow-auto" id="users-list" style="height: calc(100% - 60px);">
+        {% if users %}
+            {% for user in users %}
+                <div class="d-flex align-items-center mb-2 p-2 border-bottom user-item">
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}" alt="{{ user.username }}" class="rounded-circle me-2" style="width: 28px; height: 28px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 28px; height: 28px;">
+                            <span class="text-white fw-bold" style="font-size: 12px;">{{ user.username|first|upper }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="flex-grow-1">
+                        <div class="fw-bold" style="font-size: 14px;">{{ user.username }}</div>
+                        <small class="text-success">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> {% trans "Online" %}
+                        </small>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center text-muted">
+                <p>{% trans "No users connected" %}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% block script %}
+<script>
+    const userSocket = new WebSocket(`ws://${window.location.host}/ws/users/`);
+    userSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        if (data.type === 'user_list') {
+            const users = data.users;
+            const usersList = document.getElementById('users-list');
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                usersList.innerHTML += `<div class="d-flex align-items-center mb-2 p-2 border-bottom user-item">
+                    <img src="${user.image}" alt="${user.username}" class="rounded-circle me-2" style="width: 28px; height: 28px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                        <div class="fw-bold" style="font-size: 14px;">${user.username}</div>
+                        <small class="text-success">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> {% trans "Online" %}
+                        </small>
+                    </div>
+                </div>`;
+            });
+        }
+    };
+</script>
+{% endblock script %}
