@@ -48,9 +48,8 @@ class RegisterForm(forms.Form):
         username = cleaned_data.get("username")
         password = cleaned_data.get("password")
         repeat_password = cleaned_data.get("repeat_password")
-        print(repeat_password)
 
-        if User.objects.filter(username=username, password=password).exists():
+        if User.objects.filter(username=username).exists():
             raise ValidationError("Username already exists.")
         if password != repeat_password:
             raise ValidationError("Passwords do not match.")

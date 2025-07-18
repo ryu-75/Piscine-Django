@@ -9,6 +9,13 @@
     <h2 class="text-center pt-4 text-white">{{ title }}</h2>
     <div class="d-flex justify-content-center p-4 rounded w-auto">
         <form id="register-form" class="w-50" action="{% url action %}" method="post" enctype="multipart/form-data">
+            {% if form.errors %}
+                {% for field, errors in form.errors.items %}
+                    <div class="alert alert-danger">
+                        {{ field }}: {{ errors|join:", " }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% csrf_token %}
             {% bootstrap_form form %}
             <input id="fetch-register" type="submit" class="btn btn-light rounded" value="{{ title }}">
@@ -31,8 +38,23 @@
         const data = await response.json();
         if (response.ok)
             window.location.href = data.redirect_url;
-        else 
-            console.log(data.errors);
+        else {
+            for (const [fieldName, errorList] of Object.entries(data.errors)) {
+                const field = document.getElementById('id_' + fieldName);
+                if (field) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'text-danger mt-1 field-error';
+                    errorDiv.innerText = errorList.join(', ');
+                    field.parentNode.appendChild(errorDiv);
+                } else {
+                    document.querySelectorAll('.field-error').forEach(el => el.remove());
+                    const generalError = document.createElement('div');
+                    generalError.className = 'alert alert-danger field-error';
+                    generalError.innerText = errorList.join(', ');
+                    form.prepend(generalError);
+                }
+            }
+        }
     });
 </script>
 {% endblock script%}
