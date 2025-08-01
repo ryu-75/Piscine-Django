@@ -25,6 +25,8 @@ class RegisterView(UserPassesTestMixin, FormView):
     
     def get_context_data(self, **kwargs: Dict[str, Any]) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        form = kwargs.get("form") or context.get("form")
+        context["register_form"] = form
         context['link'] = 'register'
         if self.request.LANGUAGE_CODE == 'en':
             context['btn_name'] = 'Sign up'
@@ -34,13 +36,16 @@ class RegisterView(UserPassesTestMixin, FormView):
             context['page_title'] = 'Inscription'
         return context
     
+
     def form_valid(self, form: RegisterForm) -> HttpResponse:
         user = form.record_data()
+        if user is None:
+            return self.form_invalid(form)
         login(self.request, user)
         messages.info(self.request, "You're correctly registered !")
         return HttpResponseRedirect(self.get_success_url())
     
     def form_invalid(self, form: RegisterForm) -> HttpResponse:
-        messages.error(self.request, "Your information are not valid !")
+        form.add_error(None, "Your information are not valid")
         return super().form_invalid(form)
     

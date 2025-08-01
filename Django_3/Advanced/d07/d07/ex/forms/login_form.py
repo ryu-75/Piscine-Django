@@ -42,12 +42,10 @@ class LoginForm(forms.Form):
         cleaned_data = super().clean()
         username = cleaned_data.get("username")
         password = cleaned_data.get("password")
-        user = authenticate(username=username, password=password)
-
-        if not user:
-            if not user and self.request and self.request.LANGUAGE_CODE == "fr":
+        user = authenticate(self.request, username=username, password=password)
+        if user is None:
+            if self.request.LANGUAGE_CODE == "fr":
                 raise ValidationError(_("Informations invalides"))
-            else:
-                raise ValidationError(_("Invalid information"))
+            raise ValidationError(_("Invalid information"))
         self.user = user
         return cleaned_data

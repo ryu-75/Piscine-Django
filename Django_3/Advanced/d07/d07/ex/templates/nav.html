@@ -26,19 +26,12 @@
                     </div>  
                 {% else %}
                     <form class="navbar-form d-flex flex-row text-black gap-2" action={% url 'login' %} method="post">
-                        {% if form.errors %}
-                            <div class="text-danger d-flex flex-row align-items-center">
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <p><strong>{{ field.label }} :</strong> {{ error }}</p>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <p>{{ error }}</p>
-                                {% endfor %}
+                        {% csrf_token %}
+                        {% if login_form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ login_form.non_field_errors }}
                             </div>
                         {% endif %}
-                        {% csrf_token %}
                         {% bootstrap_form login_form %}
                         <input type="submit" class="btn btn-light rounded h-75" value="Log in">
                     </form>
@@ -65,19 +58,12 @@
                     </div>  
                 {% else %}
                     <form class="navbar-form d-flex flex-row text-black gap-2" action={% url 'login' %} method="post">
-                        {% if form.errors %}
-                            <div class="text-danger d-flex flex-row align-items-center">
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <p><strong>{{ field.label }} :</strong> {{ error }}</p>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <p>{{ error }}</p>
-                                {% endfor %}
+                        {% csrf_token %}
+                        {% if login_form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ login_form.non_field_errors }}
                             </div>
                         {% endif %}
-                        {% csrf_token %}
                         {% bootstrap_form login_form %}
                         <input type="submit" class="btn btn-light rounded h-75" value="Connexion">
                     </form>

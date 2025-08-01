@@ -50,7 +50,7 @@ class RegisterForm(forms.Form):
         username = cleaned_data.get('username')
         
         if User.objects.filter(username=username).exists():
-            return
+            raise ValidationError('This username is already used')
         if pwd and rpt_pwd and pwd != rpt_pwd:
             raise ValidationError('Password are different...')
         

@@ -29,21 +29,17 @@ class Login(FormView):
         context = super().get_context_data(**kwargs)
         if self.request.LANGUAGE_CODE == "en":
             context["link"] = "login"
-            context["btn_name"] = "Sign in"
         else:
             context["link"] = "connexion"
-            context["btn_name"] = "Se connecter"
         return context
 
     def form_valid(self, form: LoginForm):
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password")
-        user = authenticate(self.request, username=username, password=password)
-        if user is not None:
-            login(self.request, user)
-            messages.info(self.request, "You are now logged")
-            return HttpResponseRedirect(self.success_url)
-        return self.form_invalid(form)
+        user = form.user
+        if user is None:
+            return self.form_invalid(form)
+        login(self.request, user)
+        messages.info(self.request, "You are now logged")
+        return HttpResponseRedirect(self.success_url)
 
     def form_invalid(self, form: LoginForm):
-        return self.render_to_response(self.get_context_data(form=form))
+        return super().form_invalid(form)

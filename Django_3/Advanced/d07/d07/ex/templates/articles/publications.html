@@ -35,7 +35,13 @@
                 {% if article.author.username == request.user.username %}
                     <tbody class="border-bottom">
                         <td><a href="{% url 'article' article.id %}">{{ article.title }}</a></td>
-                        <td>{{ article.synopsis }}</td>
+                    <td>
+                        {% if article.synopsis|length > 20 %}
+                            {{ article.synopsis|slice:":20" }}...
+                        {% else %}
+                            {{ article.synopsis }}
+                        {% endif %}
+                    </td>
                         <td>{{ article.created|date:"d M Y" }}</td>
                         <td>
                             <form method="post" action="{% url 'publication' %}">
